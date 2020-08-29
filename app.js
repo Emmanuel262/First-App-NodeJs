@@ -11,6 +11,7 @@ const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
+const compression = require('compression');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -82,14 +83,14 @@ app.use(helmet());
 
 // Development Logging
 if (process.env.NODE_ENV === 'development') {
-	app.use(morgan('dev'));
+  app.use(morgan('dev'));
 }
 
 // Limit requrest from same API
 const limiter = rateLimit({
-	max: 100,
-	windowMs: 60 * 60 * 1000,
-	message: 'Too many requests from this IP, Please try again in an hour!'
+  max: 100,
+  windowMs: 60 * 60 * 1000,
+  message: 'Too many requests from this IP, Please try again in an hour!',
 });
 
 app.use('/api', limiter);
@@ -106,22 +107,30 @@ app.use(xss());
 
 // Prevent parameter pollution
 app.use(
-	hpp({
-		whitelist: [ 'duration', 'ratingsQuantity', 'ratingsAverage', 'maxGroupSize', 'difficulty', 'price' ]
-	})
+  hpp({
+    whitelist: [
+      'duration',
+      'ratingsQuantity',
+      'ratingsAverage',
+      'maxGroupSize',
+      'difficulty',
+      'price',
+    ],
+  })
 );
+
+app.use(compression());
 
 // Test middleware
 app.use((req, res, next) => {
-	req.requestTime = new Date().toISOString();
-	// console.log(req.cookies);
-	next();
+  req.requestTime = new Date().toISOString();
+  // console.log(req.cookies);
+  next();
 });
 
 // 3.1 views to access Routes
 app.use('/', viewRouter);
 // app.use('/employee', bestController);
-
 
 // 3.2. Routess
 
@@ -170,7 +179,7 @@ app.use('/api/v1/users', userRouter);
 // app.use('/api/v1/amatungo', amatungoRouter);
 
 app.all('*', (req, res, next) => {
-	next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
+  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 
 app.use(globalErrorHandler);

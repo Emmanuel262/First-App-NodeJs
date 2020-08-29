@@ -16,7 +16,7 @@ export const insertData = async (
   try {
     const res = await axios({
       method: 'POST',
-      url: 'http://127.0.0.1:8000/api/v1/amazu',
+      url: '/api/v1/amazu',
       data: {
         name,
         summary,
@@ -44,7 +44,7 @@ export const deleteData = async (id) => {
   try {
     const res = await axios({
       method: 'DELETE',
-      url: `http://127.0.0.1:8000/api/v1/amazu/${id}`,
+      url: `/api/v1/amazu/${id}`,
     });
     if (res.status === 'success') {
       showAlert('success', 'Data deleted successfully!');

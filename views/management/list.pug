@@ -1,0 +1,53 @@
+extends base
+
+block append head
+  link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous")
+  link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css")
+
+block content
+
+  body.bg-info
+    .row
+      .col-md-20.offset-md-0(style="background-color: #fff;margin-top: 25px;padding:20px;")
+        h3
+          a.btn.btn-secondary(href="/ihaho/test-amazu-crud")
+            i.fa.fa-plus
+            |  Create New
+          |  Employee List
+          a.btn.btn-secondary(href="/ihaho/test-amazu-crud")
+                  i.fa.fa-list-alt
+                  |  back
+        table.table.table-striped
+          thead
+            tr
+              th Full Name
+              th imagecover
+              th Summary
+              th Description
+              th images
+              th cost
+              th locations
+              th Nationality
+              th video link
+              th
+          tbody
+            |
+            each listNumber in amazu
+              tr
+                td= listNumber.name
+                td= listNumber.imageCover
+                td= listNumber.summary
+                td= listNumber.description
+                td= listNumber.images
+                td= listNumber.Cost
+                td= listNumber.locations
+                td= listNumber.Nationality
+                td= listNumber.videoLink
+                td
+                  a.edit-data(href='#')
+                    i.fa.fa-pencil.fa-lg(aria-hidden="true")
+                  a.siba-data(href='#' onclick="return confirm('Are you sure to delete this record ?');")
+                    i.fa.fa-trash.fa-lg(aria-hidden="true")
+              | 
+              
+//- `/ihaho/test-amazu-crud/delete/${listNumber._id}`

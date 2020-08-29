@@ -1,0 +1,287 @@
+extends base
+
+block append head
+  link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous")
+  link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css")
+
+
+block content
+  body.bg-info
+    .row
+      .col-md-10.offset-md-1(style="background-color: #fff;margin-top: 25px;padding:20px;")
+        a.btn.btn-secondary(href="/ihaho")
+                  i.fa.fa-list-alt
+                  |  back
+        h3 #{viewTitle}
+          //- form(action="/ihaho-amazu-detail" method="POST" autocomplete="off")
+          
+          //- -if (main)
+          //-   form.insert-data(autocomplete="off")
+          //-     input(type="hidden" name="_id")
+          //-     .form-row
+          //-       .form-group.col-md-6
+          //-         label name
+          //-         input#name.form-control(type="text" name="name" placeholder="name" value =`${main.name}`)
+          //-       .form-group.col-md-6
+          //-         label imageCover
+          //-         input#imagecover.form-control(type="text" name="imageCover" placeholder="imageCover" value =`${main.imageCover}`)
+          //-     .form-row
+          //-       .form-group.col-md-6
+          //-         label summary
+          //-         input#summary.form-control(type="text" name="summary" placeholder="summary" value =`${main.summary}`)
+          //-       .form-group.col-md-6
+          //-         label description
+          //-         input#description.form-control(type="text" name="description" placeholder="description" value =`${main.description}`)
+          //-     .form-row
+          //-       .form-group.col-md-6
+          //-         label images
+          //-         input#images.form-control(type="text" name="images" placeholder="images" value =`${main.images}`)
+          //-       .form-group.col-md-6
+          //-         label Cost
+          //-         input#cost.form-control(type="number" name="cost" placeholder="cost" value =`${main.cost}`)
+          //-     .form-row
+          //-       .form-group.col-md-6
+          //-         label locations
+          //-         input#locations.form-control(type="text" name="locations" placeholder="locations" value =`${main.locations}`)
+          //-       .form-group.col-md-6
+          //-         label nationality
+          //-         input#nationality.form-control(type="text" name="nationality" placeholder="nationality" value =`${main.nationality}`)
+          //-     .form-row
+          //-       .form-group.col-md-6
+          //-         label video Link
+          //-         input#videolink.form-control(type="link" name="videoLink" placeholder="videoLink" value =`${main.videoLink}` )
+          //-     .form-group
+          //-       button.btn.btn-info(type="submit")
+          //-         i.fa.fa-database
+          //-         |  Submit
+          //-       a.btn.btn-secondary(href="/ihaho/test-amazu-crud/list")
+          //-         i.fa.fa-list-alt
+          //-         |  View All
+
+          //-     //- form(action="/amazu" method="POST" autocomplete="off")
+          //- -else
+          form.insert-data(autocomplete="off")
+            input(type="hidden" name="_id")
+            .form-row
+              .form-group.col-md-6
+                label name
+                input#name.form-control(type="text" name="name" placeholder="name")
+              .form-group.col-md-6
+                label imageCover
+                input#imagecover.form-control(type="text" name="imageCover" placeholder="imageCover")
+            .form-row
+              .form-group.col-md-6
+                label summary
+                input#summary.form-control(type="text" name="summary" placeholder="summary")
+              .form-group.col-md-6
+                label description
+                input#description.form-control(type="text" name="description" placeholder="description")
+            .form-row
+              .form-group.col-md-6
+                label images
+                input#images.form-control(type="text" name="images" placeholder="images")
+              .form-group.col-md-6
+                label Cost
+                input#cost.form-control(type="number" name="cost" placeholder="cost")
+            .form-row
+              .form-group.col-md-6
+                label locations
+                input#locations.form-control(type="text" name="locations" placeholder="locations")
+              .form-group.col-md-6
+                label nationality
+                input#nationality.form-control(type="text" name="nationality" placeholder="nationality")
+            .form-row
+              .form-group.col-md-6
+                label video Link
+                input#videolink.form-control(type="link" name="videoLink" placeholder="videoLink")
+            .form-group
+              button.btn.btn-info(type="submit")
+                i.fa.fa-database
+                |  Submit
+              a.btn.btn-secondary(href="/ihaho/test-amazu-crud/list")
+                i.fa.fa-list-alt
+                |  View All
+
+            //- form.form-data
+            //-   .form-row
+            //-     .form-group.col.md-6
+            //-       label Full Name
+            //-       input.form-control(type="text" name="fullName" placeholder="Full Name" )
+            //-     .form-group.col-md-6
+            //-       //- label imageCover
+            //-       //- input.form-control(type="text" name="Image Cover" placeholder="Image Cover" )
+            //-       //- .form__group.form__photo-upload
+            //-       //-   //- img.form__user-photo(src=`/img/users/${user.photo}`, alt='User photo')    
+
+            //-       //- .text-danger= employee.emailError
+            //-       //- label Email
+            //-       //- input.form-control(type="text" name="email" placeholder="Email" value=`${employee.email}`)
+            //-       //- .text-danger= employee.emailError
+            //-   .form-row
+            //-     .form-group.col-md-6
+            //-       label Description
+            //-       input.form-control(type="text" name="description" placeholder="Description" )
+            //-     .form-group.col-md-6
+            //-       label Summary
+            //-       input.form-control(type="text" name="summary" placeholder="Summary")
+            //-   .form-row
+            //-     .form-group.col-md-6
+            //-       label images
+            //-       input.form-control(type="text" name="images" placeholder="images" )
+            //-     .form-group.col-md-6
+            //-       label Cost
+            //-       input.form-control(type="text" name="cost" placeholder="Cost" )
+            //-   .form-row
+            //-     .form-group.col-md-6
+            //-       label locations
+            //-       input.form-control(type="text" name="locations" placeholder="Locations" )
+            //-     .form-group.col-md-6
+            //-       label Nationality
+            //-       input.form-control(type="text" name="Nationality" placeholder="Nationality" )
+            //-   .form-group
+            //-     label(for='photo') Choose ImageCover 
+            //-     |  
+            //-     input(type='file', accept='image/*', id='photo', name='photo' placeholder='imageCover')
+            //-   .form-group
+            //-     button.btn.btn-info(type="submit")
+            //-       i.fa.fa-database
+            //-       |  Submit
+            //-       | 
+            //-     a.btn.btn-secondary(href="#")
+            //-       i.fa.fa-list-alt
+            //-       |  View All
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              //- .form-group
+              //-   label Full Name
+              //-   input.form-control(type="text" name="fullName" placeholder="Full Name" )
+              //- .form-group
+              //-   label Email
+              //-   input.form-control(type="text"  name="email" placeholder="Email" )
+              //- .form-group
+              //-   label Description
+              //-   input.form-control(type="text"  name="description" placeholder="Full Name" )
+              //- .form-row
+              //-   .form-group.col-md-6
+              //-     label Mobile
+              //-     input.form-control(type="text" name="mobile" placeholder="Mobile" )
+              //-   .form-group.col-md-6
+              //-     label City
+              //-     input.form-control(type="text" name="city" placeholder="City" )
+              //- .form-group
+              //-   button.btn.btn-info(type="submit")
+              //-     i.fa.fa-database
+              //-     |  Submit
+              //-   a.btn.btn-secondary(href="/employee/list")
+              //-     i.fa.fa-list-alt
+              //-     |  View All
+ 
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          //- form(action="/employee" method="POST" autocomplete="off")
+          //-   .form-group
+          //-     label Full Name
+          //-     input.form-control(type="text" name="fullName" placeholder="Full Name" )
+          //-   .form-group
+          //-     label Email
+          //-     input.form-control(type="text" name="email" placeholder="Email" )
+          //-   .form-group
+          //-     label Description
+          //-     input.form-control(type="text" name="description" placeholder="Full Name" )
+          //-   .form-row
+          //-     .form-group.col-md-6
+          //-       label Mobile
+          //-       input.form-control(type="text"  name="mobile" placeholder="Mobile" )
+          //-     .form-group.col-md-6
+          //-       label City
+          //-       input.form-control(type="text"  name="city" placeholder="City" )
+          //-   .form-group
+          //-     button.btn.btn-info(type="submit")
+          //-       i.fa.fa-database
+          //-       |  Submit
+          //-     a.btn.btn-secondary(href="/employee/list")
+          //-       i.fa.fa-list-alt
+          //-       |  View All
+
+
+
+    //- form(action="/amazu" method="POST" autocomplete="off")
+    //-   input(type="hidden" name="_id")
+    //-   .form-row
+    //-     .form-group.col-md-6
+    //-       label name
+    //-       input.form-control(type="text" name="name" placeholder="name")
+    //-     .form-group.col-md-6
+    //-       label imageCover
+    //-       input.form-control(type="text" name="imageCover" placeholder="imageCover")
+    //-   .form-row
+    //-     .form-group.col-md-6
+    //-       label summary
+    //-       input.form-control(type="text" name="summary" placeholder="summary")
+    //-     .form-group.col-md-6
+    //-       label description
+    //-       input.form-control(type="text" name="description" placeholder="description")
+    //-   .form-row
+    //-     .form-group.col-md-6
+    //-       label images
+    //-       input.form-control(type="text" name="images" placeholder="images")
+    //-     .form-group.col-md-6
+    //-       label Cost
+    //-       input.form-control(type="text" name="cost" placeholder="cost")
+    //-   .form-row
+    //-     .form-group.col-md-6
+    //-       label locations
+    //-       input.form-control(type="text" name="locations" placeholder="locations")
+    //-     .form-group.col-md-6
+    //-       label nationality
+    //-       input.form-control(type="text" name="nationality" placeholder="nationality")
+    //-   .form-row
+    //-     .form-group.col-md-6
+    //-       label video Link
+    //-       input.form-control(type="text" name="videoLink" placeholder="videoLink")
+    //-   .form-group
+    //-     button.btn.btn-info(type="submit")
+    //-       i.fa.fa-database
+    //-       |  Submit
+    //-     a.btn.btn-secondary(href="#")
+    //-       i.fa.fa-list-alt
+    //-       |  View All

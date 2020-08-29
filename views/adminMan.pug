@@ -1,0 +1,27 @@
+extends base
+
+mixin navItem(link, text, classname, icon)
+        li(class=`${classname}`)
+            a(href=`${link}`)
+                svg
+                    use(xlink:href=`img/icons.svg#icon-${icon}`)
+                | #{text}
+
+block content
+    main.main
+        .user-view
+            nav.user-view__menu
+                .admin-nav
+                    h5.admin-nav__heading List of Data
+                    ul.side-nav
+                    each main1 in main
+                        ul.side-nav
+                            +navItem(`${main1.slug}`, `${main1.name}`, `${main1.slug}`)
+
+            .user-view__content
+                .user-view__form-container
+                    h2.heading-secondary.ma-bt-md Update Your data
+                        .form__group.right
+                            a.btn.btn--small.btn--green(href="/employee") Create new Data
+                            a.btn.btn--small.btn--green(href="/ihaho-amazu-detail") Data test
+

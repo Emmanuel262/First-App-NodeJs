@@ -1,0 +1,238 @@
+[
+	{
+		"name": "Amazu",
+		"class": "Cyamunara"
+	},
+	{
+		"name": "Ibibanza",
+		"class": "Cyamunara"
+	},
+	{
+		"name": "Imirima",
+		"class": "Cyamunara"
+	},
+	{
+		"name": "Inzuri",
+		"class": "Cyamunara"
+	},
+	{
+		"name": "Amashyamba ya cyamunara",
+		"class": "Cyamunara"
+	},
+	{
+		"name": "Imodoka",
+		"class": "Cyamunara"
+	},
+	{
+		"name": "Moto",
+		"class": "Cyamunara"
+	},
+	{
+		"name": "Ibindi Bikoresho",
+		"class": "Cyamunara"
+	},
+	{
+		"name": "Amazu",
+		"class": "Kwigurishiriza"
+	},
+	{
+		"name": "Ibibanza",
+		"class": "Kwigurishiriza"
+	},
+	{
+		"name": "Imirima",
+		"class": "Kwigurishiriza"
+	},
+	{
+		"name": "Inzuri",
+		"class": "Kwigurishiriza"
+	},
+	{
+		"name": "Amashyamba",
+		"class": "Kwigurishiriza"
+	},
+	{
+		"name": "Imodoka",
+		"class": "Kwigurishiriza"
+	},
+	{
+		"name": "Moto",
+		"class": "Kwigurishiriza"
+	},
+	{
+		"name": "Ibindi Bikoresho",
+		"class": "Kwigurishiriza"
+	},
+	{
+		"name": "Apartment",
+		"class": "Gukodesha"
+	},
+	{
+		"name": "Rooms",
+		"class": "Gukodesha"
+	},
+	{
+		"name": "Imirima",
+		"class": "Gukodesha"
+	},
+	{
+		"name": "Imodoka",
+		"class": "Gukodesha"
+	},
+	{
+		"name": "Moto",
+		"class": "Gukodesha"
+	},
+	{
+		"name": "Ibindi ",
+		"class": "Gukodesha"
+	},
+	{
+		"name": "Inshuke",
+		"class": "Amashuri"
+	},
+	{
+		"name": "abanza",
+		"class": "Amashuri"
+	},
+	{
+		"name": "abanza",
+		"class": "Amashuri"
+	},
+	{
+		"name": "ayisumbuye",
+		"class": "Amashuri"
+	},
+	{
+		"name": "Kaminuza",
+		"class": "Amashuri"
+	},
+	{
+		"name": "Ubumenyi ngiro",
+		"class": "Amashuri"
+	},
+	{
+		"name": "ibindi",
+		"class": "Amashuri"
+	},
+	{
+		"name": "Ubugeni",
+		"class": "Imyidagaduro"
+	},
+	{
+		"name": "Imikino",
+		"class": "Imyidagaduro"
+	},
+	{
+		"name": "muzika",
+		"class": "Imyidagaduro"
+	},
+	{
+		"name": "Ibikinisho by'abana",
+		"class": "Imyidagaduro"
+	},
+	{
+		"name": "ibindi",
+		"class": "Imyidagaduro"
+	},
+	{
+		"name": "Artists",
+		"class": "MadeInRwanda"
+	},
+	{
+		"name": "Imyambaro",
+		"class": "MadeInRwanda"
+	},
+	{
+		"name": "Ibikoresho",
+		"class": "MadeInRwanda"
+	},
+	{
+		"name": "Arangisha",
+		"class": "Amatangazo"
+	},
+	{
+		"name": "Ahindura Izina",
+		"class": "Amatangazo"
+	},
+	{
+		"name": "amenyesha",
+		"class": "Amatangazo"
+	},
+	{
+		"name": "Kuranga Akazi",
+		"class": "Akazi"
+	},
+	{
+		"name": "Gusaba Akazi",
+		"class": "Akazi"
+	},
+	{
+		"name": "Gusaba Impuguke",
+		"class": "Impuguke"
+	},
+	{
+		"name": "Kumenyekanisha",
+		"class": "Impuguke"
+	},
+	{
+		"name": "Impuguke",
+		"class": "Impuguke"
+	},
+	{
+		"name": "Ibikorwa",
+		"class": "Iyobokamana"
+	},
+	{
+		"name": "Amakamyo",
+		"class": "Transport"
+	},
+	{
+		"name": "Bus",
+		"class": "Transport"
+	},
+	{
+		"name": "Moto",
+		"class": "Transport"
+	},
+	{
+		"name": "Tax Voiture",
+		"class": "Transport"
+	},
+	{
+		"name": "Fuso",
+		"class": "Transport"
+	},
+	{
+		"name": "Daihatsu",
+		"class": "Transport"
+	},
+	{
+		"name": "NGO",
+		"class": "Inkunga"
+	},
+	{
+		"name": "abikorera",
+		"class": "Inkunga"
+	},
+	{
+		"name": "Ibigo bya leta",
+		"class": "Inkunga"
+	},
+	{
+		"name": "Amabanki",
+		"class": "Inkunga"
+	},
+	{
+		"name": "Ubuconco",
+		"class": "Isoko"
+	},
+	{
+		"name": "Ibiribwa",
+		"class": "Isoko"
+	},
+	{
+		"name": "Amatungo",
+		"class": "Isoko"
+	}
+]

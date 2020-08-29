@@ -1,0 +1,15 @@
+extends base
+
+
+block append head
+    link(rel='stylesheet' href='/css/card-needed.css')
+
+block content
+    .container 
+        h1.head-text= title
+        .card-wrapper
+            each inzu in amazu
+                .card
+                    img.card-img(src=`/img/amazu/${inzu.imageCover}`, alt=`${inzu.name}`)
+                    p.about= inzu.summary
+                    a.btn(href=`/ihaho/amazu/${inzu.slug}`) Details

@@ -122,7 +122,8 @@ app.use((req, res, next) => {
 app.use('/', viewRouter);
 // app.use('/employee', bestController);
 
-// 3.2. Routes
+
+// 3.2. Routess
 
 // // app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);

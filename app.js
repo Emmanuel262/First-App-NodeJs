@@ -64,6 +64,8 @@ const bestController = require('./controllers/bestController');
 
 const app = express();
 
+app.enable('trust proxy');
+
 // app.use(
 //   bodyParser.urlencoded({
 //     extended: true,

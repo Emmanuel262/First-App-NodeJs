@@ -81,6 +81,11 @@ app.set('views', path.join(__dirname, 'views'));
 // Implement CORS
 app.use(cors());
 // Access-Control-Allow-Origin
+// app.use(cors({
+//   origin: 'https://www.interconnection.com'
+// }))
+
+app.options('*', cors());
 
 // Serving static files
 app.use(express.static(path.join(__dirname, 'public')));

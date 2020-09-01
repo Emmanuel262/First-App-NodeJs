@@ -1188,6 +1188,7 @@
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  margin-top: 200px;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
@@ -1354,6 +1355,7 @@ body {
 header,
 section {
 	width: 100%;
+  height: 100%;
 	margin: auto;
 	overflow: hidden;
 }
@@ -1519,6 +1521,37 @@ a {
 	margin-top: 20px;
 	margin-bottom: 20px;
 }
+.youtube-connection p {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.ikirango h1 {
+  margin-bottom: 40px;
+}
+.image-section {
+  /* width: 90%; */
+  padding: 20px;
+}
+.content-text-left h3, p {
+  margin: 20px;
+  font-size: 2rem;
+}
+.content-right-description h1 {
+  margin-bottom: 20px;
+  letter-spacing: 0.2rem;
+}
+.logout-btn {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+nav {
+  margin: auto;
+}
+.content-right-description p {
+  font-size: 2rem;
+  /* letter-spacing: 0.9px; */
+  line-height: 2.2rem;
+}
 .youtube-connection a {
 	color: #ffffff;
 	background: #000000;
@@ -1533,12 +1566,15 @@ a {
 
 /* Footer */
 footer {
-	margin-top: 2rem;
+	margin-top: 100px;
 	background: #35424a;
 	font-size: 30px;
 	color: #fff;
 	text-align: center;
 	padding: 1rem;
+  position: relative;
+  clear: both;
+
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -1690,13 +1726,45 @@ footer {
 }
 
 @media (min-width: 456px) and (max-width: 768px){
+  .body{
+    width: 100%;
+  }
   .btn--green {
     margin-left: 40%;
+  }
+  .error__title {
+    margin-top: 320px;
+  }
+  body{
+    width: 100%;
+    line-height: 2rem;
   }
 }
 
 @media (min-width: 800px){
+  .body {
+    width: 100%;
+  }
   .btn--green {
     margin-left: 45%;
+  }
+  .error__title {
+    margin-top: 300px;
+  }
+}
+
+@media (min-width: 300px){
+  .body {
+    width: 100%;
+  }
+  .error__title {
+    margin-top: 350px;
+    font-size: 12px;
+  }
+  .error__title h2{
+    font-size: 1.5rem;
+  }
+  .error__msg{
+    font-size: 1.2rem;
   }
 }

@@ -1,39 +1,3 @@
-//- extends base
-
-//- block append head
-//-     link(rel='stylesheet' href='/css/details.css')
-
-//- block content
-
-//-     .main-details
-//-         .top-details
-//-             .top-top-details
-//-                 a.prev(href='#') ◀  prev
-//-                 |  
-//-                 a.backup(href='/' title='back to search') ▲
-//-                 |  
-//-                 a.next(href='#') next ▶
-//-             .cost-details
-//-                 h3= inzu.cost
-//-                 h3= inzu.summary
-//-         .middle-details
-//-             .details-img
-//-                 img(src=`/img/amazu/${inzu.images[0]}` alt=`${inzu.name}`)
-//-             .left-img-details
-//-                 img(src=`/img/amazu/${inzu.images[1]}`, alt=`${inzu.name}`)
-//-                 .details-size
-//-                     h4 Aho Inzu Iherereye
-//-                     p= `${inzu.Nationality[0]}, ${inzu.Nationality[1]}, ${inzu.Nationality[2]}`
-//-                     a(href='#')= `${inzu.locations[2]} on (google map)` 
-//-                     p= inzu.locations[0]
-//-                     p= inzu.locations[1]
-//-         .details-description
-//-             .details-text
-//-                 p= inzu.description
-
-//- TESTING is always good and awesome
-//- ????????????????????????????????????????????????????????????????????????????????????????
-
 extends base
 include _reviewCard
 
@@ -42,61 +6,40 @@ block append head
     link(href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet')
 
 
-mixin overviewBox(label, text)
-    .overview-box__detail
-        span.overview-box__label= label
-        span.overview-box__text= text
-
 block content
-    h1.head-text-detail= inzu.name
-    p.summary-text= `${inzu.summary} kugiciro ${inzu.cost}rwf`
-    section.section-header
-        //- .image-cover
-        //-     img.img-cover(src=`/img/amazu/${inzu.imageCover}`, alt=`${inzu.name}`)
-        //-     img.img-cover(src=`/img/amazu/${inzu.imageCover}`, alt=`${inzu.name}`)
-        .header__hero
-            .header__hero-overlay &nbsp;
-            img.header__hero-img(src=`/img/amazu/${inzu.imageCover}`, alt=`${inzu.name}`)
-    section.section-description
-        .overview-box
-            div
-                .overview-box__group
-                    h2.heading-secondary.ma-bt-lg-text Icyerekezo
-                    +overviewBox('Igihugu', `${inzu.nationality}`)
-                    +overviewBox('Intara', `${inzu.intara}`)
-                    +overviewBox('Akarere', `${inzu.akarere}`)
-                    +overviewBox('Umurenge', `${inzu.umurenge}`)
-                    +overviewBox('Akagari', `${inzu.akagari}`)
-                    +overviewBox('Ingano', `${inzu.size}m2`)
-                    
-
-
-                .overview-box__group
-                    h2.heading-secondary.ma-bt-lg-text Abagufasha
-                    //- each guide in tour.guides
-                    .overview-box__detail
-                        //- img.overview-box__img(src=`/img/users/${user.photo}`, alt=`${user.name}`)
-
-                        span.overview-box__label +250 729382 -23423
-                        span.overview-box__text= inzu.owner
-
-                
-        .description-box
-            h2.heading-secondary.ma-bt-lg-text= `Ibijyanye na  ${inzu.name}`
-
-            - const paragraphs = inzu.description.split('\n');
-            each p in paragraphs
-                p.description__text= p
-
-    section.section-pictures
-        each img, i in inzu.images
-            .picture-box
-                img.picture-box__img(src=`/img/amazu/${img}`, alt=`${inzu.name} ${i + 1}`, class =`picture-box__img--${i + 1}`)
-
-    section.section-map
-        #map(data-locations=`${JSON.stringify(inzu.locations)}`)
-
-    
-
+     section
+      .main-content-description
+        .content-text
+          .content-text-left
+            h3=  `Igiciro: ${inzu.cost}rwf `
+            h3 Icyerekezo
+            p= `Igihugu: ${inzu.nationality}`
+            p=  `Intara: ${inzu.intara}`
+            p= `Akarere: ${inzu.akarere}`
+            p= `Umurenge: ${inzu.umurenge}`
+            p= `Ubuso: ${inzu.size}`
+          .content-right-description
+            h1=  `Ibijyanye na ${inzu.name}`
+            p= inzu.description
+        .ikirango
+          h1 Andi Mafoto Aranga
+        .image-section
+            img(src=`/img/amazu/${inzu.imageCover}` alt=`${inzu.name}`)
+            img(src="https://turaheza562410419.files.wordpress.com/2018/11/img-20181123-wa03431.jpg" alt="")
+            img(src="https://turaheza562410419.files.wordpress.com/2018/11/img-20181109-wa0091.jpg" alt="")
+            img(src="https://turaheza562410419.files.wordpress.com/2019/06/img-20190615-wa0306.jpg" alt="")
+            img(src="https://turaheza562410419.files.wordpress.com/2018/08/img-20180810-wa0008.jpg" alt="")
+            img(src="https://turaheza562410419.files.wordpress.com/2018/11/img-20181123-wa03431.jpg" alt="")
+            img(src="https://turaheza562410419.files.wordpress.com/2018/11/img-20181109-wa0091.jpg" alt="")
+            img(src="https://turaheza562410419.files.wordpress.com/2019/06/img-20190615-wa0306.jpg" alt="")
+            img(src="https://turaheza562410419.files.wordpress.com/2018/08/img-20180810-wa0008.jpg" alt="")
+          
+        .youtube-connection
+          h1 Check Our Youtube Videos
+          p
+            | Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iure aut, vero in at totam expedita ut
+            | optio odio nam laboriosam?
+          a(href="https://www.youtube.com/watch?v=3-aQZpLRNIw" target="_blank") See More
 
                 
+

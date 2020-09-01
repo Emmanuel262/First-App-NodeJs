@@ -1443,17 +1443,39 @@ a {
 /* Content-center */
 .content-left {
 	flex: 1;
+  margin-top: 20px;
 }
 .content-center {
 	flex: 2;
+  margin-top: 20px;
 }
 .content-right {
 	flex: 1;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 .center-two {
 	display: flex;
+  margin-top: 20px;
 }
-
+.cyamunara {
+  margin-bottom: 20px;
+}
+.gukodesha {
+  margin-bottom: 20px;
+}
+.kugura {
+  margin-bottom: 20px;
+}
+.community {
+  margin-bottom: 20px;
+}
+.akazi {
+  margin-bottom: 20px;
+}
+.center-right {
+  margin-bottom: 20px;
+}
 /* Left Part */
 .content-left,
 .content-center {
@@ -1752,6 +1774,10 @@ footer {
 @media (min-width: 300px){
   .body {
     width: 100%;
+  }
+  .main-content{
+    margin-left: 20px;
+
   }
   .error__title {
     margin-top: 350px;

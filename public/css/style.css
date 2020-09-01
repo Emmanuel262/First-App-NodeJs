@@ -1534,22 +1534,24 @@ a {
 }
 .content-text-left h3, p {
   margin: 20px;
-  font-size: 2rem;
+  /* font-size: 2rem; */
 }
 .content-right-description h1 {
   margin-bottom: 20px;
-  letter-spacing: 0.2rem;
+  /* letter-spacing: 0.2rem; */
 }
 .logout-btn {
   font-size: 1.1rem;
   font-weight: bold;
 }
+.title-change {
+  margin-top: 40px;
+  margin-bottom: 30px;
+}
 nav {
   margin: auto;
 }
 .content-right-description p {
-  font-size: 2rem;
-  /* letter-spacing: 0.9px; */
   line-height: 2.2rem;
 }
 .youtube-connection a {
@@ -1588,11 +1590,8 @@ footer {
 	}
 	.content-right-description {
 		flex: 2;
-		/* background: #76f176; */
 		margin: 20px;
-		/* margin-left: 120px; */
 		padding: 20px;
-		font-size: 20px;
 		color: black;
 	}
 
@@ -1626,11 +1625,8 @@ footer {
 	}
 	.content-right-description {
 		flex: 2;
-		/* background: #76f176; */
 		margin: 20px;
-		/* margin-left: 120px; */
 		padding: 20px;
-		font-size: 20px;
 		color: black;
 	}
 	/* End Of Inzu Content */

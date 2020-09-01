@@ -1747,6 +1747,9 @@ footer {
   .body{
     width: 100%;
   }
+  .title-change{
+    font-size: 3.5rem;
+  }
   .btn--green {
     margin-left: 40%;
   }
@@ -1771,9 +1774,12 @@ footer {
   }
 }
 
-@media (min-width: 300px){
+@media (min-width: 300px) and (max-width: 456px){
   .body {
     width: 100%;
+  }
+  .title-change{
+    font-size: 2.5rem;
   }
   .main-content{
     margin-left: 20px;

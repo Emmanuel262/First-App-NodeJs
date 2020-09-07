@@ -1625,14 +1625,14 @@ footer {
 /* End of video one item */
 @media (min-width: 1025px) and (max-width: 1347px){
   .video-information{
+    width: 100%;
     flex-direction: column;
-    /* margin: auto; */
     padding-left: 20%;
     padding-right: 20%;
   }
   .vid-infor video,
   .vid-youtube iframe{
-    width: 600px;
+    width: 60%;
     height: 415px;
   }
 
@@ -1646,10 +1646,10 @@ footer {
   }
   /* video */
   .video-information{
-    width: 80%;
+    width: 100%;
     flex-direction: column;
     align-content: center;
-    padding-left: 15%;
+    padding-left: 10%;
     padding-right: 20%;
   }
 
@@ -1692,9 +1692,14 @@ footer {
   }
   /* Video content */
   .video-information{
-    width: 80%;
+    width: 100%;
     flex-direction: column;
     align-content: center;
+  }
+  .vid-infor video,
+  .vid-youtube iframe {
+    width: 84%;
+    height: 400px;
   }
   /* End of video content */
 	/* Inzu Content */
@@ -1766,7 +1771,10 @@ footer {
 @media (min-width: 1024px) {
 	body {
 		border: 2px solid #35424a;
-	}
+  }
+  .video-information {
+    width: 100%;
+  }
 	.main-content {
 		display: flex;
 	}
@@ -1812,6 +1820,9 @@ footer {
   .body{
     width: 100%;
   }
+  .video-information {
+    width: 100%;
+  }
   .title-change{
     font-size: 3.5rem;
   }
@@ -1831,6 +1842,9 @@ footer {
 }
 
 @media (min-width: 800px){
+  .video-information{
+    width: 100%;
+  }
   .body {
     width: 100%;
   }
@@ -1866,6 +1880,17 @@ footer {
   .error__msg{
     font-size: 1.2rem;
   }
+  .video-information {
+    width: 100%;
+    margin-left: 0;
+    padding: 0;
+  }
+  .vid-infor video,
+  .vid-youtube iframe {
+    width: 90%;
+    border: 20px solid black;
+  }
+  
   .video-information h2 {
     display: block;
   }

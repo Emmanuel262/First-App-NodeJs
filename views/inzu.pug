@@ -33,7 +33,16 @@ block content
             img(src="https://turaheza562410419.files.wordpress.com/2018/11/img-20181109-wa0091.jpg" alt="")
             img(src="https://turaheza562410419.files.wordpress.com/2019/06/img-20190615-wa0306.jpg" alt="")
             img(src="https://turaheza562410419.files.wordpress.com/2018/08/img-20180810-wa0008.jpg" alt="")
-          
+
+        
+        .video-information
+          .vid-infor
+            h2= `Irebere amashusho aranga ${inzu.name}`
+            video(src = "/vid/video1.mp4" controls)
+          .vid-youtube 
+            h2= `Irebere amashusho kuri youtube`
+            iframe(width="560" height="315" src="https://www.youtube.com/embed/emL9dkijfZY" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="")
+
         .youtube-connection
           h1 Check Our Youtube Videos
           p

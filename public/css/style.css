@@ -1796,3 +1796,24 @@ footer {
     font-size: 1.2rem;
   }
 }
+
+.video-information{
+  margin: 0px 40px;
+  background: rgb(226, 226, 226);
+  display: flex;
+  justify-content: space-around;
+}
+
+.video-information h2 {
+  font-size: 30px;
+  margin: 20px;
+}
+
+
+.vid-infor video,
+.vid-youtube iframe{
+  width: 500px;
+  height: 315px;
+  border: 40px solid rgb(17, 17, 17);
+}
+

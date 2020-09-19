@@ -242,14 +242,14 @@ router.get('/login', authController.isLoggedIn, viewsController.getLoginForm);
 // router.get('/signup', viewsController.getSignUpForm);
 router.get('/me', authController.protect, viewsController.getAccount);
 
-router.get(
-  '/add',
-  authController.protect,
-  authController.isLoggedIn,
-  authController.restrictTo('admin'),
-  adminController.addData
-);
-router.use(authController.restrictTo('admin'));
+// router.get(
+//   '/add',
+//   authController.protect,
+//   authController.isLoggedIn,
+//   authController.restrictTo('admin'),
+//   adminController.addData
+// );
+// router.use(authController.restrictTo('admin'));
 router.get('/amazu/add', viewsController.getAmazuData);
 
 // router.get('/add', adminController.addData);

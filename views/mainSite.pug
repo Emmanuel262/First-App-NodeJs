@@ -1,7 +1,7 @@
 extends base
 
-block append head
-    link(rel='stylesheet' href='/css/pro.css')
+//- block append head
+//-     link(rel='stylesheet' href='/css/pro.css')
 
 mixin overviewBox(label, text, icon)
     .overview-box__detail
@@ -11,7 +11,7 @@ mixin overviewBox(label, text, icon)
         span.overview-box__text= text
 
 mixin mainList(name, link)
-    li: a(href=`/ihaho/${link}`)= name
+    li: a(href=`/${link}`)= name
 
 block content
     section
@@ -20,9 +20,15 @@ block content
                 h2 Ntumikira
                 ul
                     //- +mainList('Gushyira ibintu', 'me')
-                    li: a(href="#") Gushyiraho ibintu
+                    li: a(href="/add") Gushyiraho ibintu
                     li: a(href="/me") Konte yanjye
-                    input.search(type='text' name='Search Ntumikira' placeholder='Search')
+                    //- input.search(type='text' name='Search Ntumikira' placeholder='Search')
+                p(style="background-color: aquamarine;")
+                    form.form-inline(action="/all" method="GET")
+                        .form-group
+                            input.search(type="text" name="search" placeholder="Ntumikira Search")
+                            input.search-btn(type="submit" value="Search")
+    
                     +mainList('Ntumikira', '#')
 
                 .about-text-needed
@@ -39,14 +45,14 @@ block content
                         if (main.class === 'Cyamunara')
                             .cyamunara
                                 ul 
-                                    +mainList('Amazu', 'amazu')
+                                   +mainList('Amazu', 'amazu')
                                     +mainList('Ibibanza', 'ibibanza')
                                     +mainList('Imirima', 'imirima')
                                     +mainList('Inzuri', 'inzuri')
                                     +mainList('Amashyamba', 'amashyamba')
                                     +mainList('Imodoka', 'imodoka')
                                     +mainList('Moto', 'moto')
-                                    +mainList('Ibindi bikoresho', 'ibikoresho')
+                                    +mainList('Ibindi bikoresho', 'ibikoresho') 
                         else 
                             .cyamunara 
                                 ul 
@@ -61,12 +67,12 @@ block content
                         .gukodesha
                             h2 Gukodesha(rent)
                             ul 
-                                +mainList('Apartment', 'apartment')
-                                +mainList('Rooms', 'rooms')
-                                +mainList('Imirima', 'imirima')
-                                +mainList('Amashyamba', 'amashyamba')
-                                +mainList('Imodoka', 'imodoka')
-                                +mainList('Moto', 'moto')
+                                +mainList('Apartment', 'apartment-gukodesha')
+                                +mainList('Rooms', 'rooms-gukodesha')
+                                +mainList('Imirima', 'imirima-gukodesha')
+                                +mainList('Amashyamba', 'amashyamba-gukodesha')
+                                +mainList('Imodoka', 'imodoka-gukodesha')
+                                +mainList('Moto', 'moto-gukodesha')
                         .gukodesha
                             h2 Amashuri
                             ul 
@@ -74,21 +80,20 @@ block content
                                 +mainList('Abanza', 'abanza')
                                 +mainList('Ayisumbuye', 'ayisumbuye')
                                 +mainList('Kaminuza', 'kaminuza')
-                                +mainList('Ubumenyi ngiro', 'ubumeny-ngiro')
+                                +mainList('Ubumenyi ngiro', 'ubumenyi-ngiro')
 
                     .center-center
                         h2 Kwigurishiriza
                         .kugura
                             .kugura-part1
                                 ul 
-                                    +mainList('Amazu', 'amazu')
-                                    +mainList('Ibibanza', 'ibibanza')
-                                    +mainList('Imirima', 'imirima')
-                                    +mainList('Inzuri', 'inzuri')
-                                    +mainList('Amashyamba', 'amashyamba')
-                                    +mainList('Imodoka', 'imodoka')
-                                    +mainList('Moto', 'moto')
-                                    +mainList('Ibindi bikoresho', 'ibikoresho')
+                                    +mainList('Amazu', 'amazu-kwigurishiriza')
+                                    +mainList('Ibibanza', 'ibibanza-kwigurishiriza')
+                                    +mainList('Imirima', 'imirima-kwigurishiriza')
+                                    +mainList('Inzuri', 'inzuri-kwigurishiriza')
+                                    +mainList('Amashyamba', 'amashyamba-kwigurishiriza')
+                                    +mainList('Imodoka', 'imodoka-kwigurishiriza')
+                                    +mainList('Moto', 'moto-kwigurishiriza')
 
                         h2 Imyidagaduro
                         .community
@@ -98,15 +103,14 @@ block content
                                     +mainList('Imikino', 'imikino')
                                     +mainList('Muzika', 'muzika')
                                     +mainList('Ibikinisho by\'Abana', 'ibikinisho-by-abana')
-                                    +mainList('Ibindi', 'ibindi')
 
                         h2 Made in Rwanda
                         .community
                             .community-left
                                 ul 
-                                    +mainList('Artists', '#')
+                                    +mainList('Artists', 'artists')
                                     +mainList('Imyambaro', 'imyambaro')
-                                    +mainList('Ibikoresho', 'ibikoresho')
+                                    +mainList('Ibikoresho', 'ibikoresho-rwanda')
 
                         h2 Amatangazo
                         .community
@@ -135,11 +139,11 @@ block content
                             h2 Transport
                             ul 
                                 +mainList('Amakamyo', 'amakamyo')
-                                +mainList('Bus', '#')
+                                +mainList('Bus', 'bus-transport')
                                 +mainList('Moto', 'moto-transport')
                                 +mainList('Tax Voiture', 'tax-voiture')
-                                +mainList('Fuso', 'fuso')
-                                +mainList('Daihatsu', 'daihatsu')
+                                +mainList('Fuso', 'fuso-transport')
+                                +mainList('Daihatsu', 'daihatsu-transport')
                         .akazi
                             h2 Inkunga
                             ul 

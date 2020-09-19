@@ -1,0 +1,20 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous")
+        title All Data
+    body
+        .container.mt-3
+            a.btn.btn-primary.d-inline(href="/") Ntumikira
+            | 
+            a.btn.btn-primary.d-inline(href="/admin") Admin
+            h1.mb-1= data.name
+            .text-muted= data.createdAt.toLocaleDateString()
+            div= data.summary
+            div= data.owner
+            a(href="/admin").btn.btn-secondary All Data
+            | 
+            a.btn.btn-secondary(href=`admin/${data.identifier}/edit/${data.id}`) Edit
+

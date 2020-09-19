@@ -1208,8 +1208,6 @@
 }
 
 .login-form {
-  /* width: 100%;
-  margin: 0 auto;  */
   background-color: #fff;
   -webkit-box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.06);
   box-shadow: 0 2.5rem 8rem 2rem rgba(0, 0, 0, 0.06);
@@ -1622,6 +1620,18 @@ footer {
 .content-left {
   padding: 3px;
 }
+.form-control {
+  width: 100%;
+}
+.content-left .search {
+  width: 200px;
+  margin: 20px;
+}
+.content-left .search-btn {
+  font-size: 20px;
+  margin-left: 25%;
+}
+
 .about-text-needed {
   border: 5px solid rgb(133, 133, 133);
 }
@@ -1646,16 +1656,40 @@ footer {
     padding-left: 20%;
     padding-right: 20%;
   }
+  .content-left {
+    width: 200px;
+    max-width: 20%;
+  }
+  .about-text-needed {
+    width: 100%;
+  }
   .vid-infor video,
   .vid-youtube iframe {
     width: 60%;
     height: 415px;
+  }
+  .content-right {
+    display: none;
   }
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
   body {
     border: 5px solid #35424a;
+  }
+  .main-content {
+    padding: 10px;
+  }
+  .content-left {
+    width: 150px;
+    max-width: 18%;
+    margin-right: 20px;
+  }
+  .content-left h2 {
+    width: 120px;
+  }
+  .about-text-needed {
+    width: 100%;
   }
   /* video */
   .video-information {
@@ -1680,7 +1714,9 @@ footer {
   }
 
   /* End Of Inzu Content */
-  .content-left,
+  /* .content-left{
+
+  } */
   .content-right {
     display: none;
   }
@@ -1701,6 +1737,11 @@ footer {
 @media (max-width: 768px) {
   body {
     border: 5px solid #35424a;
+  }
+  .content-left .search-btn {
+    width: 30px;
+    font-size: 25px;
+    margin-left: 1%;
   }
   /* Video content */
   .video-information {
@@ -1904,5 +1945,17 @@ footer {
 
   .video-information h2 {
     display: block;
+  }
+}
+
+@media (max-width: 603px) {
+  .login-form {
+    margin: 0;
+    padding: 0;
+  }
+
+  .login-form button {
+    margin-left: 32%;
+    margin-bottom: 10px;
   }
 }

@@ -1,0 +1,29 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous")
+        title All Data
+    body
+        .container
+            h1.mb-4= title
+            a.btn.btn-primary.d-inline(href="/") Ntumikira
+            | 
+            a(href=`admin/amazu/new` class="btn btn-success") New Data
+            
+
+            each dat in data 
+                .card.mt-4
+                    .card-body
+                        h4.card-title= dat.name
+                        .card-subtitle.text-muted.mb-2
+                            = dat.createdAt.toLocaleDateString()
+                        .card-text.mb-2= dat.summary
+                        a.btn.btn-primary(href=`admin/${dat.identifier}/${dat.slug}`) Read More
+                        |  
+                        a.btn.btn-secondary(href=`admin/${dat.identifier}/edit/${dat.id}`) Edit
+                        | 
+
+                        form(action=`/admin/${dat.identifier}/${dat.id}?_method=DELETE` method="POST").d-inline
+                            button(type="submit").btn.btn-danger Delete

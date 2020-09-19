@@ -1,0 +1,50 @@
+extends new
+
+block content
+  .form-group
+      label(for="name") Name
+      input#name.form-control(required="" type="text" name="name" value=`${data.name}`)
+  .form-row
+    .form-group.col-md-6
+      label(for="identifier") Identifier
+      input#identifier.form-control(required="" type="text" name="identifier" value=`${data.identifier}`)
+    .form-group.col-md-6
+      label(for="videoLink") videoLink
+      input#videoLink.form-control(required="" type="text" name="videoLink" value=`${data.videoLink}`)
+  .form-row
+    .form-group.col-md-6
+      label(for="summary") Summary
+      textarea#summary.form-control(name="summary" value=`${data.summary}`)
+    .form-group.col-md-6
+      label(for="description") Description
+      textarea#description.form-control(name="description" value=`${data.description}`)
+  .form-row
+    .form-group.col-md-6
+      label(for="nationality") Nationality
+      input#nationality.form-control(required="" type="text" name="nationality" value=`${data.nationality}`)
+    .form-group.col-md-6
+      label(for="intara") Intara
+      input#intara.form-control(required="" type="text" name="intara" value=`${data.intara}`)
+  .form-row
+    .form-group.col-md-6
+      label(for="akarere") Akarere
+      input#akarere.form-control(required="" type="text" name="akarere" value=`${data.akarere}`)
+    .form-group.col-md-6
+      label(for="umurenge") Umurenge
+      input#umurenge.form-control(required="" type="text" name="umurenge" value=`${data.umurenge}`)
+  .form-row
+    .form-group.col-md-6
+      label(for="owner") Nyirubwite
+      input#owner.form-control(required="" type="text" name="owner" value=`${data.owner}`)
+    .form-group.col-md-6
+      label(for="akagari") Akagari
+      input#akagari.form-control(required="" type="text" name="akagari" value=`${data.akagari}`)
+  .form-row
+    .form-group.col-md-6
+      label(for="cost") Cost
+      input#cost.form-control(required="" type="number" name="cost" value=`${data.cost}`)
+    .form-group.col-md-6
+      label(for="size") Size
+      input#size.form-control(required="" type="text" name="size" value=`${data.size}`)
+  a.btn.btn-secondary.mr-3(href="/") Cancel
+  button.btn.btn-primary(type="submit") Save

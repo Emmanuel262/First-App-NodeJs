@@ -1,0 +1,68 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous")
+        title Form
+    body
+        .container.mb-3
+            h1.mb-3.mt-3.text-center Add new Data
+                .back-button 
+                    a.btn.btn-primary.d-inline(href="/") Ntumikira
+                    | 
+                    a.btn.btn-primary.d-inline(href="/admin") Admin
+
+            form(action=`/admin/amazu/${data.id}?_method=PUT` method="POST")
+                .form-row
+                    .form-group.col-md-6
+                        label(for="name") Name
+                        input#name.form-control(required type="text" name="name" value=`${data.name}`)
+                    .form-group.col-md-6
+                        label(for='imageCover') ImageCover
+                        input#imageCover.form-control(required type="text" name="imageCover" value=`${data.imageCover}`)
+
+                .form-row
+                    .form-group.col-md-6
+                        label(for="identifier") Identifier
+                        input#identifier.form-control(required="" type="text" name="identifier" value=`${data.identifier}`)
+                    .form-group.col-md-6
+                        label(for="videoLink") videoLink
+                        input#videoLink.form-control(required="" type="text" name="videoLink" value=`${data.videoLink}`)
+                .form-row
+                    .form-group.col-md-6
+                        label(for="summary") Summary
+                        textarea#summary.form-control(name="summary" )=`${data.summary}`
+                    .form-group.col-md-6
+                        label(for="description") Description
+                        textarea#description.form-control(name="description")=`${data.description}`
+                .form-row
+                    .form-group.col-md-6
+                        label(for="nationality") Nationality
+                        input#nationality.form-control(required="" type="text" name="nationality" value=`${data.nationality}`)
+                    .form-group.col-md-6
+                        label(for="intara") Intara
+                        input#intara.form-control(required="" type="text" name="intara" value=`${data.intara}`)
+                .form-row
+                    .form-group.col-md-6
+                        label(for="akarere") Akarere
+                        input#akarere.form-control(required="" type="text" name="akarere" value=`${data.akarere}`)
+                    .form-group.col-md-6
+                        label(for="umurenge") Umurenge
+                        input#umurenge.form-control(required="" type="text" name="umurenge" value=`${data.umurenge}`)
+                .form-row
+                    .form-group.col-md-6
+                        label(for="owner") Nyirubwite
+                        input#owner.form-control(required="" type="text" name="owner" value=`${data.owner}`)
+                    .form-group.col-md-6
+                        label(for="akagari") Akagari
+                        input#akagari.form-control(required="" type="text" name="akagari" value=`${data.akagari}`)
+                .form-row
+                    .form-group.col-md-6
+                        label(for="cost") Cost
+                        input#cost.form-control(required="" type="number" name="cost" value=`${data.cost}`)
+                    .form-group.col-md-6
+                        label(for="size") Size
+                        input#size.form-control(required="" type="number" name="size" value=`${data.size}`)
+                a.btn.btn-secondary.mr-3(href="/admin") Cancel
+                button.btn.btn-primary(type="submit") Save

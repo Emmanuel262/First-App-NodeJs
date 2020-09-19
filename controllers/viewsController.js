@@ -2,65 +2,47 @@
 const factory = require('../controllers/handlerFactory');
 const Tour = require('../models/tourModel');
 const Main = require('../models/mainModel');
-const Amazu = require('../models/amazuModel');
-const Apartment = require('../models/apartment');
-const Abikorera = require('../models/abikoreraModel');
-const Ahindura = require('../models/ahindura-izinaModel');
-const Akazi = require('../models/akaziModel');
-const Amakamyo = require('../models/amakamyoModel');
-const Amashyamba = require('../models/amashyambaModel');
-const Amatungo = require('../models/amatungoModel');
-const Amenyesha = require('../models/amenyeshaModel');
-const Arangisha = require('../models/arangishaModel');
-// const Artist = require('../models/ArtistsModel');
-const Bank = require('../models/bankModel');
-const Bus = require('../models/busModel');
-const Daihatsu = require('../models/daihatsuModel');
-const Furniture = require('../models/furnitureModel');
-const GusabaImpuguke = require('../models/gusabaImpugukeModel');
-const Ibibanza = require('../models/ibibanzaModel');
-const Ibigo = require('../models/ibigoModel');
-const Fuso = require('../models/fusoModel');
-const IbikinishoAbana = require('../models/ibikinishoModel');
-const Ibikoresho = require('../models/ibikoreshoModel');
-const IbikorwaIyobokamana = require('../models/ibikorwaIyobokamanaModel');
-const Ibiribwa = require('../models/ibiribwaModel');
-const Imikino = require('../models/imikinoModel');
-const Imirima = require('../models/imirimaModel');
-const Imodoka = require('../models/imodokaModel');
-const Imyambaro = require('../models/imyambaroModel');
-const Inzuri = require('../models/inzuriModel');
-const KumenyekanishaImpuguke = require('../models/kumenyekanishaImpugukeModel');
-const KurangaAkazi = require('../models/kurangaAkaziModel');
-const Moto = require('../models/kurangaAkaziModel');
-const Muzika = require('../models/muzikaModel');
-const Ngo = require('../models/ngoModel');
-const Rooms = require('../models/roomsModel');
-const TaxVoiture = require('../models/taxVoitureModel');
-const Ubuconco = require('../models/ubuconcoModel');
-const Ubugeni = require('../models/ubugeniModel');
-const Post= require('../models/postModel');
-
 const Booking = require('../models/bookingModel');
 const User = require('../models/userModel');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 
-exports.getApartments = catchAsync(async (req, res, next) => {
-  const amazu = await Apartment.find();
-  if (!amazu) {
-    return next(new AppError('Nta Apartments zihari.', 404));
+const Data = require('../models/dataModel');
+
+// Get all available data
+exports.getAllDataAvailable = catchAsync(async (req, res, next) => {
+  if (req.query.search) {
+    const regex = new RegExp(escapeRegex(req.query.search), 'gi');
+    const amazu = await Data.find({ name: regex }).sort({
+      createdAt: 'desc',
+    });
+    res.status(200).render('amazu', {
+      title: `Search Results `,
+      amazu,
+    });
   }
+});
+
+//  amazu data
+exports.getAmazuData = catchAsync(async (req, res, next) => {
+  const identifier = 'amazu';
+  const amazu = await Data.find({ identifier: 'amazu' }).sort({
+    createdAt: 'desc',
+  });
+  if (!amazu) {
+    return next(new AppError('Nta mazu ahari.', 404));
+  }
+
   res.status(200).render('amazu', {
-    title: 'Apartments zihari.',
+    title: 'Amazu Ahari',
     amazu,
   });
 });
 
-exports.getApartment = catchAsync(async (req, res, next) => {
-  const inzu = await Apartment.findOne({ slug: req.params.slug });
+exports.getOneData = catchAsync(async (req, res, next) => {
+  const inzu = await Data.findOne({ slug: req.params.slug });
   if (!inzu) {
-    return next(new AppError('Nta Apartment Zihari', 404));
+    return next(new AppError('No data available', 404));
   }
   res.status(200).render('inzu', {
     title: `${inzu.name}`,
@@ -68,1068 +50,822 @@ exports.getApartment = catchAsync(async (req, res, next) => {
   });
 });
 
-exports.getIbibanza = catchAsync(async (req, res, next) => {
-  const amazu = await Ibibanza.find();
+//  Ibibanza data
+exports.getIbibanzaData = catchAsync(async (req, res, next) => {
+  const identifier = 'ibibanza';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
+  });
   if (!amazu) {
-    return next(new AppError('Nta Bibanza bihari.', 404));
+    return next(new AppError('Nta bibanza bihari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'ibibanza bigurishwa',
+    title: 'Ibibanza Bihari',
     amazu,
   });
 });
 
-exports.getIkibanza = catchAsync(async (req, res, next) => {
-  const inzu = await Ibibanza.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Kibanza gihari.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu}`,
-    inzu,
+//  Imirima data
+exports.getImirimaData = catchAsync(async (req, res, next) => {
+  const identifier = 'imirima';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getImirima = catchAsync(async (req, res, next) => {
-  const amazu = await Imirima.find();
   if (!amazu) {
-    return next(new AppError('Nta Mirimima ihari.', 404));
+    return next(new AppError('Nta mirima ihari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Imirima  Igurishwa',
+    title: 'Imirima ihari',
     amazu,
   });
 });
 
-exports.getUmurima = catchAsync(async (req, res, next) => {
-  const inzu = await Imirima.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Murima Uhari .', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Inzuri data
+exports.getInzuriData = catchAsync(async (req, res, next) => {
+  const identifier = 'inzuri';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getInzuri = catchAsync(async (req, res, next) => {
-  const amazu = await Inzuri.find();
   if (!amazu) {
-    return next(new AppError('Nta Nzuri Zihari.', 404));
+    return next(new AppError('Nta nzuri zihari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Inzuri Zigurishwa',
+    title: 'Inzuri zihari',
     amazu,
   });
 });
 
-exports.getUrwuri = catchAsync(async (req, res, next) => {
-  const inzu = await Inzuri.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Nzuri Zihari.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Amashyamba data
+exports.getAmashyambaData = catchAsync(async (req, res, next) => {
+  const identifier = 'amashyamba';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getAmashyamba = catchAsync(async (req, res, next) => {
-  const amazu = await Amashyamba.find();
   if (!amazu) {
-    return next(new AppError('Nta Mashyamba Ahari.', 404));
+    return next(new AppError('Nta mashyamba ahari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Amashyamba Agurishwa',
+    title: 'Amashyamba ahari',
     amazu,
   });
 });
-
-exports.getIshyamba = catchAsync(async (req, res, next) => {
-  const inzu = await Amashyamba.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta shyamba  rihari', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Imodoka data
+exports.getImodokaData = catchAsync(async (req, res, next) => {
+  const identifier = 'imodoka';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getAmamodoka = catchAsync(async (req, res, next) => {
-  const amazu = await Imodoka.find();
   if (!amazu) {
-    return next(new AppError('Nta Modoka Zihari.', 404));
+    return next(new AppError('Nta modoka zihari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Imodoka Zigurishwa',
+    title: 'Imodoka zihari',
     amazu,
   });
 });
-
-exports.getImodoka = catchAsync(async (req, res, next) => {
-  const inzu = await Imodoka.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Modoka Ihari.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Moto data
+exports.getMotoData = catchAsync(async (req, res, next) => {
+  const identifier = 'moto';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getMotos = catchAsync(async (req, res, next) => {
-  const amazu = await Moto.find();
   if (!amazu) {
-    return next(new AppError('Nta Moto Zihari.', 404));
+    return next(new AppError('Nta moto zihari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Moto Zigurishwa',
+    title: 'Moto Zihari',
     amazu,
   });
 });
-
-exports.getMoto = catchAsync(async (req, res, next) => {
-  const inzu = await Moto.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Moto Ihari.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Ibindi bikoresho data
+exports.getIbikoreshoData = catchAsync(async (req, res, next) => {
+  const identifier = 'ibikoresho';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getIbikoresho = catchAsync(async (req, res, next) => {
-  const amazu = await Ibikoresho.find();
   if (!amazu) {
-    return next(new AppError('Nta Bikoresho Bihari.', 404));
+    return next(new AppError('Nta bikoresho bihari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Ibikoresho Bigurishwa',
+    title: 'Ibikoresho bihari',
     amazu,
   });
 });
-
-exports.getIgikoresho = catchAsync(async (req, res, next) => {
-  const inzu = await Ibikoresho.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Gikoresho Gihari.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Apartment  data
+exports.getApartmentData = catchAsync(async (req, res, next) => {
+  const identifier = 'apartment';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getRooms = catchAsync(async (req, res, next) => {
-  const amazu = await Rooms.find();
   if (!amazu) {
-    return next(new AppError('Nta Byumba Bihari.', 404));
+    return next(new AppError('Nta Apartment zihari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Ibyumba  Byo Kuraramo',
+    title: 'Apartment zihari',
     amazu,
   });
 });
-
-exports.getRoom = catchAsync(async (req, res, next) => {
-  const inzu = await Rooms.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Cyumba Gihari.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Rooms  data
+exports.getRoomsData = catchAsync(async (req, res, next) => {
+  const identifier = 'rooms';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getImirimaG = catchAsync(async (req, res, next) => {
-  const amazu = await Imirima.find();
   if (!amazu) {
-    return next(new AppError('Nta Mirima Ihari', 404));
+    return next(new AppError('Nta Rooms zihari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Imirima Igurishwa',
+    title: 'Rooms zihari',
     amazu,
   });
 });
-
-exports.getUmurimaG = catchAsync(async (req, res, next) => {
-  const inzu = await Imirima.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Murima Uhari.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Imirima  data
+exports.getImirimaGData = catchAsync(async (req, res, next) => {
+  const identifier = 'imirimag';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getAmashyambaG = catchAsync(async (req, res, next) => {
-  const amazu = await Amashyamba.find();
   if (!amazu) {
-    return next(new AppError('Nta Mashyamba Ahari.', 404));
+    return next(new AppError('Nta Imirima zihari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Amashyamba Agurishwa',
+    title: 'Imirima zihari',
     amazu,
   });
 });
-
-exports.getIshyambaG = catchAsync(async (req, res, next) => {
-  const inzu = await Amashyamba.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Shyamba Rihari.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Amashyamba  data
+exports.getAmashyambaGData = catchAsync(async (req, res, next) => {
+  const identifier = 'amashyambag';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getImodokaGs = catchAsync(async (req, res, next) => {
-  const amazu = await Imodoka.find();
   if (!amazu) {
-    return next(new AppError('Nta Modoka Zihari.', 404));
+    return next(new AppError('Nta Amashyamba zihari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Imodoka Zigurishwa',
+    title: 'Amashyamba zihari',
     amazu,
   });
 });
-
-exports.getImodokaG = catchAsync(async (req, res, next) => {
-  const inzu = await Imodoka.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Modoka Zihari.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Imodoka  data
+exports.getImodokaGData = catchAsync(async (req, res, next) => {
+  const identifier = 'imodokag';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getMotoGs = catchAsync(async (req, res, next) => {
-  const amazu = await Moto.find();
   if (!amazu) {
-    return next(new AppError('Nta Moto Zihari.', 404));
+    return next(new AppError('Nta Imodoka zihari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Moto Zigurishwa',
+    title: 'Imodoka zihari',
     amazu,
   });
 });
-
-exports.getMotoG = catchAsync(async (req, res, next) => {
-  const inzu = await Moto.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Moto Zihari.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Moto  data
+exports.getMotoGData = catchAsync(async (req, res, next) => {
+  const identifier = 'motog';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getArangisha = catchAsync(async (req, res, next) => {
-  const amazu = await Arangisha.find();
   if (!amazu) {
-    return next(new AppError('Nta Matangazo Ahari.', 404));
+    return next(new AppError('Nta Moto zihari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Amatangazo Arangisha',
+    title: 'Moto zihari',
     amazu,
   });
 });
-
-exports.getRangira = catchAsync(async (req, res, next) => {
-  const inzu = await Arangisha.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Tangazo Rihazi.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Inshuke data
+exports.getInshukeData = catchAsync(async (req, res, next) => {
+  const identifier = 'inshuke';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getAhindura = catchAsync(async (req, res, next) => {
-  const amazu = await Ahindura.find();
   if (!amazu) {
-    return next(new AppError('Nta Matangazo Ahari.', 404));
+    return next(new AppError('Nta mashuri ahari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Amatangazo Ahindura Izina',
+    title: "Amashuri y'inshuke",
     amazu,
   });
 });
-
-exports.getRihindura = catchAsync(async (req, res, next) => {
-  const inzu = await Ahindura.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Tangazo Rihari.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Abanza data
+exports.getAbanzaData = catchAsync(async (req, res, next) => {
+  const identifier = 'abanza';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getAmenyesha = catchAsync(async (req, res, next) => {
-  const amazu = await Amenyesha.find();
   if (!amazu) {
-    return next(new AppError('Nta Matangazo Ahari.', 404));
+    return next(new AppError('Nta mashuri ahari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Amatangazo Amenyesha',
+    title: 'Amashuri Abanza',
     amazu,
   });
 });
-
-exports.getRimenyesha = catchAsync(async (req, res, next) => {
-  const inzu = await Amenyesha.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Tangazo Rihari.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Ayisumbuye data
+exports.getAyisumbuyeData = catchAsync(async (req, res, next) => {
+  const identifier = 'ayisumbuye';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getUbuconco = catchAsync(async (req, res, next) => {
-  const amazu = await Ubuconco.find();
   if (!amazu) {
-    return next(new AppError('Nta Buconco Buhari.', 404));
+    return next(new AppError('Nta mashuri ahari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Ubuconco Bwo Kwisoko',
+    title: 'Amashuri ayisumbuye',
     amazu,
   });
 });
-
-exports.getAgaconco = catchAsync(async (req, res, next) => {
-  const inzu = await Ubuconco.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Gaconco Gahari.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  kaminuza data
+exports.getKaminuzaData = catchAsync(async (req, res, next) => {
+  const identifier = 'kaminuza';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getIbiribwa = catchAsync(async (req, res, next) => {
-  const amazu = await Ibiribwa.find();
   if (!amazu) {
-    return next(new AppError('Nta Biribwa Bihari.', 404));
+    return next(new AppError('Nta mashuri ahari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Ibiribwa Kw\'isoko',
+    title: 'Amashuri kaminuza',
     amazu,
   });
 });
-
-exports.getIkiribwa = catchAsync(async (req, res, next) => {
-  const inzu = await Ibiribwa.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Kiribwa.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  ubumenyi ngiro data
+exports.getUbumenyiData = catchAsync(async (req, res, next) => {
+  const identifier = 'ubumenyingiro';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getAmatungo = catchAsync(async (req, res, next) => {
-  const amazu = await Amatungo.find();
   if (!amazu) {
-    return next(new AppError('Nta Matungo.', 404));
+    return next(new AppError('Nta mashuri ahari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Amatungo Agurishwa',
+    title: 'Amashuri ubumenyi ngiro',
     amazu,
   });
 });
 
-exports.getItungo = catchAsync(async (req, res, next) => {
-  const inzu = await Amatungo.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Tungo.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Amazu Kwigurishiriza data
+exports.getAmazuKData = catchAsync(async (req, res, next) => {
+  const identifier = 'amazuk';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getNgos = catchAsync(async (req, res, next) => {
-  const amazu = await Ngo.find();
   if (!amazu) {
-    return next(new AppError('Nta NGO.', 404));
+    return next(new AppError('Nta mazu ahari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'NGO',
+    title: 'Amazu ahari yo kwigurishiriza',
     amazu,
   });
 });
 
-exports.getNgo = catchAsync(async (req, res, next) => {
-  const inzu = await Ngo.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta NGO.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Ibibanza Kwigurishiriza data
+exports.getIbibanzaKData = catchAsync(async (req, res, next) => {
+  const identifier = 'ibibanzak';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getAbikorera = catchAsync(async (req, res, next) => {
-  const amazu = await Abikorera.find();
   if (!amazu) {
-    return next(new AppError('Nta Bikorera.', 404));
+    return next(new AppError('Nta Ibibanza bihari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Abikorera Bahari',
+    title: 'Ibibanza ahari byo kwigurishiriza',
     amazu,
   });
 });
-
-exports.getUwikorera = catchAsync(async (req, res, next) => {
-  const inzu = await Abikorera.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Muntu Wikorera.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Imirima Kwigurishiriza data
+exports.getImirimaKData = catchAsync(async (req, res, next) => {
+  const identifier = 'imirimak';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getIbigo = catchAsync(async (req, res, next) => {
-  const amazu = await Ibigo.find();
   if (!amazu) {
-    return next(new AppError('Nta Bigo.', 404));
+    return next(new AppError('Nta Imirima ihari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Ibigo Byikorera',
+    title: 'Imirima ahari yo kwigurishiriza',
     amazu,
   });
 });
-
-exports.getIkigo = catchAsync(async (req, res, next) => {
-  const inzu = await Ibigo.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Kigo.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Inzuri Kwigurishiriza data
+exports.getInzuriKData = catchAsync(async (req, res, next) => {
+  const identifier = 'inzurik';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-exports.getAmabanki = catchAsync(async (req, res, next) => {
-  const amazu = await Bank.find();
-  if (!Amazu) {
-    return next(new AppError('Nta Banki.', 404));
-  }
-  res.status(200).render('amazu', {
-    title: 'Banks',
-    amazu,
-  });
-});
-
-exports.getBanki = catchAsync(async (req, res, next) => {
-  const inzu = await Bank.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Bank.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
-  });
-});
-exports.getFusos = catchAsync(async (req, res, next) => {
-  const amazu = await Fuso.find();
   if (!amazu) {
-    return next(new AppError('Nta Fuso.', 404));
+    return next(new AppError('Nta Inzuri zihari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Fusos',
+    title: 'Inzuri zihari zo kwigurishiriza',
     amazu,
   });
 });
-
-exports.getFuso = catchAsync(async (req, res, next) => {
-  const inzu = await Fuso.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Fuso.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Amashyamba Kwigurishiriza data
+exports.getAmashyambaKData = catchAsync(async (req, res, next) => {
+  const identifier = 'amashyambak';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getDaihatsus = catchAsync(async (req, res, next) => {
-  const amazu = await Daihatsu.find();
   if (!amazu) {
-    return next(new AppError('Nta Daihatsus.', 404));
+    return next(new AppError('Nta Amashyamba ahari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Daihatsus',
+    title: 'Amashyamba ahari',
     amazu,
   });
 });
-
-exports.getDaihatsu = catchAsync(async (req, res, next) => {
-  const inzu = await Daihatsu.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Daihatsu.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Imodoka Kwigurishiriza data
+exports.getImodokaKData = catchAsync(async (req, res, next) => {
+  const identifier = 'imodokak';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getTaxVoitures = catchAsync(async (req, res, next) => {
-  const amazu = await TaxVoiture.find();
   if (!amazu) {
-    return next(new AppError('Nta Taxvoitures.', 404));
+    return next(new AppError('Nta Imodoka zihari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'TaxVoitures',
+    title: 'Imodoka zihari zo kwigurishiriza',
     amazu,
   });
 });
-
-exports.getTaxVoiture = catchAsync(async (req, res, next) => {
-  const inzu = await TaxVoiture.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Taxvoiture.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Moto Kwigurishiriza data
+exports.getMotoKData = catchAsync(async (req, res, next) => {
+  const identifier = 'motok';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getMotoTransports = catchAsync(async (req, res, next) => {
-  const amazu = await Moto.find();
   if (!amazu) {
-    return next(new AppError('Nta Moto Transport.', 404));
+    return next(new AppError('Nta Moto zihari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Moto Transport',
+    title: 'Moto zihari zo kwigurishiriza',
     amazu,
   });
 });
-
-exports.getMotoTransport = catchAsync(async (req, res, next) => {
-  const inzu = await Moto.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Moto Transport.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Ibindi Kwigurishiriza data
+exports.getIbindiKData = catchAsync(async (req, res, next) => {
+  const identifier = 'ibindi kwigurishiriza';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getAmakamyo = catchAsync(async (req, res, next) => {
-  const amazu = await Amakamyo.find();
   if (!amazu) {
-    return next(new AppError('Nta Makamyo.', 404));
+    return next(new AppError('Nta Ibindi bikoresho bihari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Amakamyo Gutwara',
+    title: 'Ibindi bihari byo kwigurishiriza',
     amazu,
   });
 });
-
-exports.getIkamyo = catchAsync(async (req, res, next) => {
-  const inzu = await Amakamyo.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Kamyo.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Artists data
+exports.getArtistsData = catchAsync(async (req, res, next) => {
+  const identifier = 'artists';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getIbikorwa = catchAsync(async (req, res, next) => {
-  const amazu = await IbikorwaIyobokamana.find();
   if (!amazu) {
-    return next(new AppError('Nta Bikorwa.', 404));
+    return next(new AppError('Nta Artists bahari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'IbikorwaIyobokamana',
+    title: 'Artists bahari',
     amazu,
   });
 });
-
-exports.getIgikorwa = catchAsync(async (req, res, next) => {
-  const inzu = await IbikorwaIyobokamana.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Gikorwa Iyobokamana.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Ubugeni data
+exports.getUbugeniData = catchAsync(async (req, res, next) => {
+  const identifier = 'ubugeni';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getImpugukes = catchAsync(async (req, res, next) => {
-  const amazu = await GusabaImpuguke.find();
   if (!amazu) {
-    return next(new AppError('Nta Mpuguke.', 404));
+    return next(new AppError('Nta Ubugeni buhari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Gusaba Impuguke',
+    title: 'Ubugeni buhari',
     amazu,
   });
 });
-
-exports.getImpuguke = catchAsync(async (req, res, next) => {
-  const inzu = await GusabaImpuguke.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Mpuguke.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Imikino data
+exports.getImikinoData = catchAsync(async (req, res, next) => {
+  const identifier = 'imikino';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getKumenyekanishaImpugukes = catchAsync(async (req, res, next) => {
-  const amazu = await KumenyekanishaImpuguke.find();
   if (!amazu) {
-    return next(new AppError('Nta Mpuguke Imenyekanishwa.', 404));
+    return next(new AppError('Nta mikino ihari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'KumenyekanishaImpuguke',
+    title: 'Imikino ihari',
     amazu,
   });
 });
-
-exports.getKumenyekanishaImpuguke = catchAsync(async (req, res, next) => {
-  const inzu = await KumenyekanishaImpuguke.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Kumenyekanisha Impuguke.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Muzika data
+exports.getMuzikaData = catchAsync(async (req, res, next) => {
+  const identifier = 'muzika';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getGusabaImpugukes = catchAsync(async (req, res, next) => {
-  const amazu = await GusabaImpuguke.find();
   if (!amazu) {
-    return next(new AppError('Nta Gusaba Impuguke.', 404));
+    return next(new AppError('Nta muzika uhari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'GusabaImpuguke',
+    title: 'Muzika ihari',
     amazu,
   });
 });
-
-exports.getGusabaImpuguke = catchAsync(async (req, res, next) => {
-  const inzu = await GusabaImpuguke.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Gusaba Impuguke.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Abana data
+exports.getAbanaData = catchAsync(async (req, res, next) => {
+  const identifier = 'abana';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getKurangaAkazis = catchAsync(async (req, res, next) => {
-  const amazu = await KurangaAkazi.find();
   if (!amazu) {
-    return next(new AppError('Nta Kuranga Akazi.', 404));
+    return next(new AppError("Nta bikinisho by'abana bihari.", 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'KurangaAkazi',
+    title: "Ibikinisho by'abana bihari",
     amazu,
   });
 });
-
-exports.getKurangaAkazi = catchAsync(async (req, res, next) => {
-  const inzu = await KurangaAkazi.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Kuranga Akazi.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Imyambaro data
+exports.getImyambaroData = catchAsync(async (req, res, next) => {
+  const identifier = 'imyambaro';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getGusabaAkazis = catchAsync(async (req, res, next) => {
-  const amazu = await Akazi.find();
   if (!amazu) {
-    return next(new AppError('Nta Gusaba Akazi.', 404));
+    return next(new AppError('Nta Imyambaro ihari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Akazi',
+    title: 'Imyambaro ihari',
     amazu,
   });
 });
-
-exports.getGusabaAkazi = catchAsync(async (req, res, next) => {
-  const inzu = await Akazi.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Gusaba Akazi.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  IbikoreshoR data
+exports.getIbikoreshoRData = catchAsync(async (req, res, next) => {
+  const identifier = 'ibikoreshor';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getMadeInRwandaIbikoreshos = catchAsync(async (req, res, next) => {
-  const amazu = await Ibikoresho.find();
   if (!amazu) {
-    return next(new AppError('Nta Made in Rwanda.', 404));
+    return next(new AppError('Nta Ibikoresho made in rwanda bihari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Ibikoresho Made in Rwanda',
+    title: 'Ibikoresho maed in rwanda bihari',
     amazu,
   });
 });
 
-exports.getMadeInRwandaIgikoresho = catchAsync(async (req, res, next) => {
-  const inzu = await Ibikoresho.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Made In Rwanda.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Amatangazo Data
+exports.getArangishaData = catchAsync(async (req, res, next) => {
+  const identifier = 'arangisha';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getImyambaro = catchAsync(async (req, res, next) => {
-  const amazu = await Imyambaro.find();
   if (!amazu) {
-    return next(new AppError('Nta Myambaro.', 404));
+    return next(new AppError('Nta matangazo ahari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Imyambaro',
+    title: 'Amatangazo ahari',
     amazu,
   });
 });
 
-exports.getUmwambaro = catchAsync(async (req, res, next) => {
-  const inzu = await Imyambaro.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Mwambaro.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Amatangazo Data
+exports.getAhinduraIzinaData = catchAsync(async (req, res, next) => {
+  const identifier = 'ahindura';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-exports.getArtists = catchAsync(async (req, res, next) => {
-  const amazu = await Artist.find();
   if (!amazu) {
-    return next(new AppError('Nta Artists.', 404));
+    return next(new AppError('Nta matangazo ahari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Artist',
+    title: 'Amatangazo ahari',
     amazu,
   });
 });
-
-exports.getArt = catchAsync(async (req, res, next) => {
-  const inzu = await Artist.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Artist.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Amatangazo Data
+exports.getAmenyeshaData = catchAsync(async (req, res, next) => {
+  const identifier = 'amenyesha';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getUbugenis = catchAsync(async (req, res, next) => {
-  const amazu = await Ubugeni.find();
   if (!amazu) {
-    return next(new AppError('Nta Bugeni.', 404));
+    return next(new AppError('Nta matangazo ahari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Ubugeni',
+    title: 'Amatangazo ahari',
     amazu,
   });
 });
-
-exports.getUbugeni = catchAsync(async (req, res, next) => {
-  const inzu = await Ubugeni.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Bugeni.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Akazi Data
+exports.getKurangaAkaziData = catchAsync(async (req, res, next) => {
+  const identifier = 'kuranga';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getImikino = catchAsync(async (req, res, next) => {
-  const amazu = await Imikino.find();
   if (!amazu) {
-    return next(new AppError('Nta Mikino Ihari.', 404));
+    return next(new AppError('Nta matangazo ahari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Imikino',
+    title: 'Amatangazo akazi ahari',
     amazu,
   });
 });
-
-exports.getUmukino = catchAsync(async (req, res, next) => {
-  const inzu = await Imikino.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Mukino Uhari.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Gusaba Data
+exports.getGusabaAkaziData = catchAsync(async (req, res, next) => {
+  const identifier = 'gusaba';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getMuzikas = catchAsync(async (req, res, next) => {
-  const amazu = await Muzika.find();
   if (!amazu) {
-    return next(new AppError('Nta Muzika zihari.', 404));
+    return next(new AppError('Nta matangazo ahari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Muzika',
+    title: 'Gusaba akazi ahari',
     amazu,
   });
 });
-
-exports.getMuzika = catchAsync(async (req, res, next) => {
-  const inzu = await Muzika.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Muzika Uhari.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Impuguke Data
+exports.getImpugukeData = catchAsync(async (req, res, next) => {
+  const identifier = 'impuguke';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-exports.getIbikinisho = catchAsync(async (req, res, next) => {
-  const amazu = await IbikinishoAbana.find();
   if (!amazu) {
-    return next(new AppError('Nta Bikinisho.', 404));
+    return next(new AppError('Nta Mpuguke Ihari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Ibikinisho Abana ',
+    title: 'Impuguke Zihari',
     amazu,
   });
 });
-
-exports.getIgikinisho = catchAsync(async (req, res, next) => {
-  const inzu = await IbikinishoAbana.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Gikinisho.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Impuguke Data
+exports.getImpugukeKumenyekanishaData = catchAsync(async (req, res, next) => {
+  const identifier = 'impugukek';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getAmazuKwis = catchAsync(async (req, res, next) => {
-  const amazu = await Amazu.find();
   if (!amazu) {
-    return next(new AppError('Nta Mazu.', 404));
+    return next(new AppError('Nta Mpuguke Ihari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Amazu Agurishwa',
+    title: 'Impuguke Zihari',
     amazu,
   });
 });
-
-exports.getAmazuKwi = catchAsync(async (req, res, next) => {
-  const inzu = await Amazu.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Nzu.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Iyobokamana Data
+exports.getIyobokamanaData = catchAsync(async (req, res, next) => {
+  const identifier = 'iyobokamana';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getIkibanzaKwis = catchAsync(async (req, res, next) => {
-  const amazu = await Ibibanza.find();
   if (!amazu) {
-    return next(new AppError('Nta Bibanza Bihari.', 404));
+    return next(new AppError('Nta makuru ahari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Ibibanza Bigurishwa',
+    title: 'Iyobokamana',
     amazu,
   });
 });
-
-exports.getIkibanzaKwi = catchAsync(async (req, res, next) => {
-  const inzu = await Ibibanza.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Kibanza.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Transport Data
+exports.getAmakamyoTransportData = catchAsync(async (req, res, next) => {
+  const identifier = 'amakamyo';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getImirimaKwis = catchAsync(async (req, res, next) => {
-  const amazu = await Imirima.find();
   if (!amazu) {
-    return next(new AppError('Nta Mirima.', 404));
+    return next(new AppError('Nta makamyo ahari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Imirima Igurishwa',
+    title: 'Amakamyo ahari',
     amazu,
   });
 });
-
-exports.getUmurimaKwi = catchAsync(async (req, res, next) => {
-  const inzu = await Imirima.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Murima.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Transport Data
+exports.getBusTransportData = catchAsync(async (req, res, next) => {
+  const identifier = 'bus';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getInzuriKwis = catchAsync(async (req, res, next) => {
-  const amazu = await Inzuri.find();
   if (!amazu) {
-    return next(new AppError('Nta Nzuri.', 404));
+    return next(new AppError('Nta Bus zihari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Inzuri Zigurishwa',
+    title: 'Bus zihari',
     amazu,
   });
 });
-
-exports.getUrwuriKwi = catchAsync(async (req, res, next) => {
-  const inzu = await Inzuri.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Rwuri.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Transport Data
+exports.getMotoTransportData = catchAsync(async (req, res, next) => {
+  const identifier = 'motot';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getAmashyambaKwis = catchAsync(async (req, res, next) => {
-  const amazu = await Amashyamba.find();
   if (!amazu) {
-    return next(new AppError('Nta Mashyamba.', 404));
+    return next(new AppError('Nta Moto zihari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Amashyamba Agurishwa',
+    title: 'Moto zihari',
     amazu,
   });
 });
 
-exports.getIshyambaKwi = catchAsync(async (req, res, next) => {
-  const inzu = await Amashyamba.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Shyamba.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Transport Data
+exports.getTaxVoitureTransportData = catchAsync(async (req, res, next) => {
+  const identifier = 'taxvoiture';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getImodokaKwis = catchAsync(async (req, res, next) => {
-  const amazu = await Imodoka.find();
   if (!amazu) {
-    return next(new AppError('Nta Modoka.', 404));
+    return next(new AppError('Nta TaxVoiture zihari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Imodoka Zigurishwa',
+    title: 'TaxVoiture zihari',
     amazu,
   });
 });
-
-exports.getImodokaKwi = catchAsync(async (req, res, next) => {
-  const inzu = await Imodoka.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Modoka.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Transport Data
+exports.getFusoTransportData = catchAsync(async (req, res, next) => {
+  const identifier = 'fuso';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getMotoKwis = catchAsync(async (req, res, next) => {
-  const amazu = await Moto.find();
   if (!amazu) {
-    return next(new AppError('Nta Moto.', 404));
+    return next(new AppError('Nta Fuso zihari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Moto Zigurishwa',
+    title: 'Fuso zihari',
     amazu,
   });
 });
-
-exports.getMotoKwi = catchAsync(async (req, res, next) => {
-  const inzu = await Moto.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Moto.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+//  Transport Data
+exports.getDaihatsuTransportData = catchAsync(async (req, res, next) => {
+  const identifier = 'daihatsu';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
   });
-});
-
-exports.getIbikoreshoKwis = catchAsync(async (req, res, next) => {
-  const amazu = await Ibikoresho.find();
   if (!amazu) {
-    return next(new AppError('Nta Bikoresho.', 404));
+    return next(new AppError('Nta Daihatsu zihari.', 404));
   }
+
   res.status(200).render('amazu', {
-    title: 'Ibikoresho Bigurishwa',
+    title: 'Daihatsu zihari',
     amazu,
   });
 });
-
-exports.getIgikoreshoKwi = catchAsync(async (req, res, next) => {
-  const inzu = await Ibikoresho.findOne({ slug: req.params.slug });
-  if (!inzu) {
-    return next(new AppError('Nta Gikoresho.', 404));
+//  Transport Data
+exports.getNgoData = catchAsync(async (req, res, next) => {
+  const identifier = 'ngo';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
+  });
+  if (!amazu) {
+    return next(new AppError('Nta Ngo ihari.', 404));
   }
-  res.status(200).render('inzu', {
-    title: `${inzu.name}`,
-    inzu,
+
+  res.status(200).render('amazu', {
+    title: 'Ngo zihari',
+    amazu,
   });
 });
+//  Transport Data
+exports.getAbikoreraData = catchAsync(async (req, res, next) => {
+  const identifier = 'abikorera';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
+  });
+  if (!amazu) {
+    return next(new AppError('Nta Abikorera bahari.', 404));
+  }
 
-exports.getOverview = catchAsync(async (req, res, next) => {
-  // 1. Get tour data from collection
-  const tours = await Tour.find();
+  res.status(200).render('amazu', {
+    title: 'Abikorera bahari',
+    amazu,
+  });
+});
+//  Transport Data
+exports.getIbigoData = catchAsync(async (req, res, next) => {
+  const identifier = 'ibigobyaleta';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
+  });
+  if (!amazu) {
+    return next(new AppError('Nta Ibigo bihari.', 404));
+  }
 
-  // 2. Build template
+  res.status(200).render('amazu', {
+    title: 'Ibigo bihari',
+    amazu,
+  });
+});
+//  Transport Data
+exports.getAmabankiData = catchAsync(async (req, res, next) => {
+  const identifier = 'amabanki';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
+  });
+  if (!amazu) {
+    return next(new AppError('Nta Amabanki ahari.', 404));
+  }
 
-  // 3. Render that template using tour data from step 1
-  res.status(200).render('overview', {
-    title: 'All tours',
-    tours,
+  res.status(200).render('amazu', {
+    title: 'Amabanki ahari',
+    amazu,
+  });
+});
+//  Transport Data
+exports.getUbuconcoData = catchAsync(async (req, res, next) => {
+  const identifier = 'ubuconco';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
+  });
+  if (!amazu) {
+    return next(new AppError('Nta buconco buhari.', 404));
+  }
+
+  res.status(200).render('amazu', {
+    title: 'Ubuconco buhari',
+    amazu,
+  });
+});
+//  Transport Data
+exports.getIbiribwaData = catchAsync(async (req, res, next) => {
+  const identifier = 'ibiribwa';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
+  });
+  if (!amazu) {
+    return next(new AppError('Nta biribwa bihari.', 404));
+  }
+
+  res.status(200).render('amazu', {
+    title: 'Ibiribwa ahari',
+    amazu,
+  });
+});
+//  Transport Data
+exports.getAmatungoData = catchAsync(async (req, res, next) => {
+  const identifier = 'amatungo';
+  const amazu = await Data.find({ identifier: identifier }).sort({
+    createdAt: 'desc',
+  });
+  if (!amazu) {
+    return next(new AppError('Nta matungo bihari.', 404));
+  }
+
+  res.status(200).render('amazu', {
+    title: 'Amatungo ahari',
+    amazu,
   });
 });
 
@@ -1138,70 +874,6 @@ exports.getAllMain = catchAsync(async (req, res, next) => {
   res.status(200).render('mainSite', {
     title: 'Ihaho Group',
     main,
-  });
-});
-// Amashuri akeneye gukosorwa
-
-exports.getInshuke = catchAsync(async (req, res, next) => {
-  return next(new AppError('There is no information yet.', 404));
-});
-
-exports.getAbanzas = catchAsync(async (req, res, next) => {
-  return next(new AppError('There is no information yet.', 404));
-});
-
-exports.getAyisumbuye = catchAsync(async (req, res, next) => {
-  return next(new AppError('There is no information yet.', 404));
-});
-
-exports.getKaminuzas = catchAsync(async (req, res, next) => {
-  return next(new AppError('There is no information yet.', 404));
-});
-exports.getUbumenyis = catchAsync(async (req, res, next) => {
-  return next(new AppError('There is no information yet.', 404));
-});
-// aha niho arangiriye
-
-exports.getAmazu = catchAsync(async (req, res, next) => {
-  const amazu = await Amazu.find();
-  if (!amazu) {
-    return next(new AppError('Nta Mazu.', 404));
-  }
-  res.status(200).render('amazu', {
-    title: 'Amazu Agurishwa',
-    amazu,
-  });
-});
-exports.getInzu = catchAsync(async (req, res, next) => {
-  const inzu = await Amazu.findOne({ slug: req.params.slug }).populate({
-    path: 'reviews',
-    field: 'review rating user',
-  });
-  if (!inzu) {
-    return next(new AppError('Nta Nzu.', 404));
-  }
-  res.status(200).render('inzu', {
-    title: 'We the best',
-    inzu,
-  });
-});
-
-exports.getTour = catchAsync(async (req, res, next) => {
-  // 1. Get the data, for the requested tour (including reviews and tour guide)
-  const tour = await Tour.findOne({ slug: req.params.slug }).populate({
-    path: 'reviews',
-    field: 'review rating user',
-  });
-  if (!tour) {
-    return next(new AppError('There is no tour with that name.', 404));
-  }
-  // 2. Build template
-
-  // 3. Render that template using data from step 1
-
-  res.status(200).render('tour', {
-    title: `${tour.name} Tour`,
-    tour,
   });
 });
 
@@ -1216,24 +888,6 @@ exports.getSignUpForm = (req, res) => {
     title: 'Create Your Account',
   });
 };
-// testing CRUD operation
-// exports.getAmazuTest = catchAsync(async (req, res) => {
-//   const main = await Post.find();
-//   res.status(200).render('management/mainLayout', {
-//     title: 'Best Test ever',
-//     main,
-//   });
-// });
-
-// exports.getAmazuList = catchAsync(async (req, res) => {
-//   const amazu = await Post.find();
-//   res.status(200).render('management/list', {
-//     title: 'Amazu Yose',
-//     amazu,
-//   });
-// });
-
-// end of testing
 
 exports.getAccount = catchAsync(async (req, res) => {
   const main = await Main.find();
@@ -1248,20 +902,6 @@ exports.getAccountTest = (req, res) => {
     title: 'Your account',
   });
 };
-
-exports.getMyTours = catchAsync(async (req, res, next) => {
-  // 1. Find all bookings
-  const bookings = await Booking.find({ user: req.user.id });
-
-  // 2. Find tours with the returned IDs
-  const tourIDs = bookings.map((el) => el.tour);
-  const tours = await Tour.find({ _id: { $in: tourIDs } });
-
-  res.status(200).render('overview', {
-    title: 'My Tours',
-    tours,
-  });
-});
 
 exports.updateUserData = catchAsync(async (req, res, next) => {
   const updatedUser = await User.findByIdAndUpdate(
@@ -1280,11 +920,6 @@ exports.updateUserData = catchAsync(async (req, res, next) => {
     user: updatedUser,
   });
 });
-
-exports.getCyamunara = catchAsync(async (req, res) => {
-  const main = await Main.find();
-  res.status(200).render('adminMan', {
-    title: 'Manage Cyamunara',
-    main,
-  });
-});
+function escapeRegex(text) {
+  return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, '\\$&');
+}

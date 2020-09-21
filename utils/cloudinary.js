@@ -16,7 +16,7 @@ exports.uploads = (file, folder) => {
       file,
       (results) => {
         resolve({
-          url: results.secure_url,
+          url: results.url,
           id: results.public_id,
         });
       },

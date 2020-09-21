@@ -19,7 +19,9 @@ router.use(authController.protect);
 router.use(authController.restrictTo('admin'));
 
 router.get('/', async (req, res) => {
-  const data = await Data.find();
+  const data = await Data.find().sort({
+    createdAt: 'desc',
+  });
   res.render('admin/mainAdmin', { data });
 });
 // Admin for Amazu
@@ -618,13 +620,12 @@ function saveDataAndRedirect(path) {
     for (let i = 0; i < urls.length; i++) {
       realUrls.push(urls[i].url);
     }
-
     if (req.file) {
       try {
         for (let i = 0; i < ids.length; i++) {
           await cloudinary.v2.uploader.destroy(ids[i]);
         }
-        files = await cloudinaries.v2.uploader.upload(req.file.path);
+        files = await cloudinary.v2.uploader.upload(req.file.path);
         data.images = files.secure_url;
         data.imageIds = files.public_id;
       } catch (err) {
@@ -657,6 +658,7 @@ function saveDataAndRedirect(path) {
     }
   });
 }
+
 // function saveDataAndRedirect(path) {
 //   return catchAsync(async (req, res) => {
 //     let data = req.data;

@@ -5,9 +5,9 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 cloudinary.config({
-  cloud_name: 'university-of-rwanda',
-  api_key: '164946218657611',
-  api_secret: 'Yq2cCRDqmzGuJnRl5klFJHycIQs',
+  cloud_name: process.env.CLOUDINARY_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
 exports.uploads = (file, folder) => {
@@ -16,7 +16,7 @@ exports.uploads = (file, folder) => {
       file,
       (results) => {
         resolve({
-          url: results.url,
+          url: results.secure_url,
           id: results.public_id,
         });
       },

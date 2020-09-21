@@ -14,14 +14,14 @@ html(lang="en")
                     a.btn.btn-primary.d-inline(href="/admin") Admin
 
 
-            form(action="/admin" method="POST")
+            form(action="/admin" method="POST" enctype="multipart/form-data")
                 .form-row
                     .form-group.col-md-6
                         label(for="name") Name
                         input#name.form-control(required type="text" name="name" )
                     .form-group.col-md-6
-                        label(for='imageCover') ImageCover
-                        input#imageCover.form-control(required type="text" name="imageCover")
+                        label(for="image") Image
+                        input#image(type="file" name="image" accept="image/*" multiple)
 
                 .form-row
                     .form-group.col-md-6

@@ -10,6 +10,11 @@ block content
         .card-wrapper
             each inzu in amazu
                 .card
-                    img.card-img(src=`/img/amazu/${inzu.imageCover}`, alt=`${inzu.name}`)
+
+                    - if (inzu.image[0] === undefined)
+                        img.card-img(src=`/img/amazu/defaultHouse.png`, alt="Best house ever")
+
+                    - else
+                        img.card-img(src=`${inzu.image[0]}`, alt=`${inzu.name}`)
                     p.about= inzu.summary
                     a.btn(href=`/amazu/${inzu.slug}`) Details

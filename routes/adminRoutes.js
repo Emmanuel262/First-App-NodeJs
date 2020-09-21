@@ -1,6 +1,11 @@
 /* eslint-disable */
 
 const express = require('express');
+const cloudinary = require('cloudinary');
+
+const fs = require('fs');
+const upload = require('../utils/multer');
+const cloudinaries = require('../utils/cloudinary');
 const adminController = require('../controllers/adminController');
 const authController = require('../controllers/authController');
 const adminFactory = require('../controllers/adminFactory');
@@ -21,12 +26,23 @@ router.get('/', async (req, res) => {
 router.get('/amazu/new', adminFactory.renderNew);
 router.get('/amazu/:slug', adminFactory.getOneData);
 router.get('/amazu/edit/:id', adminFactory.renderEdit);
-router.post('/', adminFactory.createData, saveDataAndRedirect('new'));
-router.put('/amazu/:id', adminFactory.updateData, saveDataAndRedirect('edit'));
+router.post(
+  '/',
+  upload.array('image', 5),
+  adminFactory.createData,
+  saveDataAndRedirect('new')
+);
+router.put(
+  '/amazu/:id',
+  upload.array('image', 5),
+  adminFactory.updateData,
+  saveDataAndRedirect('edit')
+);
 router.delete('/amazu/:id', adminFactory.deleteData);
 // Admin for ibibanza
 router.put(
   '/ibibanza/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -37,6 +53,7 @@ router.get('/ibibanza/edit/:id', adminFactory.renderEdit);
 // Admin for imirima
 router.put(
   '/imirima/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -45,7 +62,12 @@ router.get('/imirima/:slug', adminFactory.getOneData);
 router.get('/imirima/edit/:id', adminFactory.renderEdit);
 
 // Admin for inzuri
-router.put('/inzuri/:id', adminFactory.updateData, saveDataAndRedirect('edit'));
+router.put(
+  '/inzuri/:id',
+  upload.array('image', 5),
+  adminFactory.updateData,
+  saveDataAndRedirect('edit')
+);
 router.delete('/inzuri/:id', adminFactory.deleteData);
 router.get('/inzuri/:slug', adminFactory.getOneData);
 router.get('/inzuri/edit/:id', adminFactory.renderEdit);
@@ -53,6 +75,7 @@ router.get('/inzuri/edit/:id', adminFactory.renderEdit);
 // Admin for amashyamba
 router.put(
   '/amashyamba/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -63,6 +86,7 @@ router.get('/amashyamba/edit/:id', adminFactory.renderEdit);
 // Admin for imodoka
 router.put(
   '/imodoka/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -71,7 +95,12 @@ router.get('/imodoka/:slug', adminFactory.getOneData);
 router.get('/imodoka/edit/:id', adminFactory.renderEdit);
 
 // Admin for moto
-router.put('/moto/:id', adminFactory.updateData, saveDataAndRedirect('edit'));
+router.put(
+  '/moto/:id',
+  upload.array('image', 5),
+  adminFactory.updateData,
+  saveDataAndRedirect('edit')
+);
 router.delete('/moto/:id', adminFactory.deleteData);
 router.get('/moto/:slug', adminFactory.getOneData);
 router.get('/moto/edit/:id', adminFactory.renderEdit);
@@ -79,6 +108,7 @@ router.get('/moto/edit/:id', adminFactory.renderEdit);
 // Admin for ibikoresho
 router.put(
   '/ibikoresho/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -88,6 +118,7 @@ router.get('/ibikoresho/edit/:id', adminFactory.renderEdit);
 // Admin for apartment
 router.put(
   '/apartment/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -95,13 +126,19 @@ router.delete('/apartment/:id', adminFactory.deleteData);
 router.get('/apartment/:slug', adminFactory.getOneData);
 router.get('/apartment/edit/:id', adminFactory.renderEdit);
 // Admin for rooms
-router.put('/rooms/:id', adminFactory.updateData, saveDataAndRedirect('edit'));
+router.put(
+  '/rooms/:id',
+  upload.array('image', 5),
+  adminFactory.updateData,
+  saveDataAndRedirect('edit')
+);
 router.delete('/rooms/:id', adminFactory.deleteData);
 router.get('/rooms/:slug', adminFactory.getOneData);
 router.get('/rooms/edit/:id', adminFactory.renderEdit);
 // Admin for imirima-gukodesha
 router.put(
   '/imirimag/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -111,6 +148,7 @@ router.get('/imirimag/edit/:id', adminFactory.renderEdit);
 // Admin for amashyambag
 router.put(
   '/amashyambag/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -120,6 +158,7 @@ router.get('/amashyambag/edit/:id', adminFactory.renderEdit);
 // Admin for imodokag
 router.put(
   '/imodokag/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -128,13 +167,19 @@ router.get('/imodokag/:slug', adminFactory.getOneData);
 router.get('/imodokag/edit/:id', adminFactory.renderEdit);
 
 // Admin for moto-gukodesha
-router.put('/motog/:id', adminFactory.updateData, saveDataAndRedirect('edit'));
+router.put(
+  '/motog/:id',
+  upload.array('image', 5),
+  adminFactory.updateData,
+  saveDataAndRedirect('edit')
+);
 router.delete('/motog/:id', adminFactory.deleteData);
 router.get('/motog/:slug', adminFactory.getOneData);
 router.get('/motog/edit/:id', adminFactory.renderEdit);
 // Admin for Amashuri
 router.put(
   '/inshuke/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -142,7 +187,12 @@ router.delete('/inshuke/:id', adminFactory.deleteData);
 router.get('/inshuke/:slug', adminFactory.getOneData);
 router.get('/inshuke/edit/:id', adminFactory.renderEdit);
 // Admin for Amashuri
-router.put('/abanza/:id', adminFactory.updateData, saveDataAndRedirect('edit'));
+router.put(
+  '/abanza/:id',
+  upload.array('image', 5),
+  adminFactory.updateData,
+  saveDataAndRedirect('edit')
+);
 router.delete('/abanza/:id', adminFactory.deleteData);
 router.get('/abanza/:slug', adminFactory.getOneData);
 router.get('/abanza/edit/:id', adminFactory.renderEdit);
@@ -150,6 +200,7 @@ router.get('/abanza/edit/:id', adminFactory.renderEdit);
 // Admin for Amashuri
 router.put(
   '/ayisumbuye/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -159,6 +210,7 @@ router.get('/ayisumbuye/edit/:id', adminFactory.renderEdit);
 // Admin for Amashuri
 router.put(
   '/kaminuza/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -168,6 +220,7 @@ router.get('/kaminuza/edit/:id', adminFactory.renderEdit);
 // Admin for Amashuri
 router.put(
   '/ubumenyingiro/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -175,13 +228,19 @@ router.delete('/ubumenyingiro/:id', adminFactory.deleteData);
 router.get('/ubumenyingiro/:slug', adminFactory.getOneData);
 router.get('/ubumenyingiro/edit/:id', adminFactory.renderEdit);
 // Admin for Kwigurishiriza
-router.put('/amazuk/:id', adminFactory.updateData, saveDataAndRedirect('edit'));
+router.put(
+  '/amazuk/:id',
+  upload.array('image', 5),
+  adminFactory.updateData,
+  saveDataAndRedirect('edit')
+);
 router.delete('/amazuk/:id', adminFactory.deleteData);
 router.get('/amazuk/:slug', adminFactory.getOneData);
 router.get('/amazuk/edit/:id', adminFactory.renderEdit);
 // Admin for Kwigurishiriza
 router.put(
   '/ibibanzak/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -191,6 +250,7 @@ router.get('/ibibanzak/edit/:id', adminFactory.renderEdit);
 // Admin for Kwigurishiriza
 router.put(
   '/imirimak/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -200,6 +260,7 @@ router.get('/imirimak/edit/:id', adminFactory.renderEdit);
 // Admin for Kwigurishiriza
 router.put(
   '/inzurik/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -209,6 +270,7 @@ router.get('/inzurik/edit/:id', adminFactory.renderEdit);
 // Admin for Kwigurishiriza
 router.put(
   '/amashyambak/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -218,6 +280,7 @@ router.get('/amashyambak/edit/:id', adminFactory.renderEdit);
 // Admin for Kwigurishiriza
 router.put(
   '/imodokak/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -225,12 +288,22 @@ router.delete('/imodokak/:id', adminFactory.deleteData);
 router.get('/imodokak/:slug', adminFactory.getOneData);
 router.get('/imodokak/edit/:id', adminFactory.renderEdit);
 // Admin for Kwigurishiriza
-router.put('/motok/:id', adminFactory.updateData, saveDataAndRedirect('edit'));
+router.put(
+  '/motok/:id',
+  upload.array('image', 5),
+  adminFactory.updateData,
+  saveDataAndRedirect('edit')
+);
 router.delete('/motok/:id', adminFactory.deleteData);
 router.get('/motok/:slug', adminFactory.getOneData);
 router.get('/motok/edit/:id', adminFactory.renderEdit);
 // Admin for Imyidagaduro
-router.put('/motok/:id', adminFactory.updateData, saveDataAndRedirect('edit'));
+router.put(
+  '/motok/:id',
+  upload.array('image', 5),
+  adminFactory.updateData,
+  saveDataAndRedirect('edit')
+);
 router.delete('/motok/:id', adminFactory.deleteData);
 router.get('/motok/:slug', adminFactory.getOneData);
 router.get('/motok/edit/:id', adminFactory.renderEdit);
@@ -238,6 +311,7 @@ router.get('/motok/edit/:id', adminFactory.renderEdit);
 // Admin for Imyidagaduro
 router.put(
   '/ubugeni/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -247,6 +321,7 @@ router.get('/ubugeni/edit/:id', adminFactory.renderEdit);
 // Admin for Imyidagaduro
 router.put(
   '/imikino/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -254,18 +329,29 @@ router.delete('/imikino/:id', adminFactory.deleteData);
 router.get('/imikino/:slug', adminFactory.getOneData);
 router.get('/imikino/edit/:id', adminFactory.renderEdit);
 // Admin for Imyidagaduro
-router.put('/muzika/:id', adminFactory.updateData, saveDataAndRedirect('edit'));
+router.put(
+  '/muzika/:id',
+  upload.array('image', 5),
+  adminFactory.updateData,
+  saveDataAndRedirect('edit')
+);
 router.delete('/muzika/:id', adminFactory.deleteData);
 router.get('/muzika/:slug', adminFactory.getOneData);
 router.get('/muzika/edit/:id', adminFactory.renderEdit);
 // Admin for Imyidagaduro
-router.put('/abana/:id', adminFactory.updateData, saveDataAndRedirect('edit'));
+router.put(
+  '/abana/:id',
+  upload.array('image', 5),
+  adminFactory.updateData,
+  saveDataAndRedirect('edit')
+);
 router.delete('/abana/:id', adminFactory.deleteData);
 router.get('/abana/:slug', adminFactory.getOneData);
 router.get('/abana/edit/:id', adminFactory.renderEdit);
 // Admin for made in rwanda
 router.put(
   '/artists/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -275,6 +361,7 @@ router.get('/artists/edit/:id', adminFactory.renderEdit);
 // Admin for made in rwanda
 router.put(
   '/imyambaro/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -284,6 +371,7 @@ router.get('/imyambaro/edit/:id', adminFactory.renderEdit);
 // Admin for made in rwanda
 router.put(
   '/ibikoreshor/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -294,6 +382,7 @@ router.get('/ibikoreshor/edit/:id', adminFactory.renderEdit);
 // Admin for Amatangazo
 router.put(
   '/arangisha/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -304,6 +393,7 @@ router.get('/arangisha/edit/:id', adminFactory.renderEdit);
 // Admin for Amatangazo
 router.put(
   '/ahindura/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -313,6 +403,7 @@ router.get('/ahindura/edit/:id', adminFactory.renderEdit);
 // Admin for Amatangazo
 router.put(
   '/amenyesha/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -323,6 +414,7 @@ router.get('/amenyesha/edit/:id', adminFactory.renderEdit);
 // Admin for Akazi
 router.put(
   '/kuranga/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -330,7 +422,12 @@ router.delete('/kuranga/:id', adminFactory.deleteData);
 router.get('/kuranga/:slug', adminFactory.getOneData);
 router.get('/kuranga/edit/:id', adminFactory.renderEdit);
 // Admin for Akazi
-router.put('/gusaba/:id', adminFactory.updateData, saveDataAndRedirect('edit'));
+router.put(
+  '/gusaba/:id',
+  upload.array('image', 5),
+  adminFactory.updateData,
+  saveDataAndRedirect('edit')
+);
 router.delete('/gusaba/:id', adminFactory.deleteData);
 router.get('/gusaba/:slug', adminFactory.getOneData);
 router.get('/gusaba/edit/:id', adminFactory.renderEdit);
@@ -338,6 +435,7 @@ router.get('/gusaba/edit/:id', adminFactory.renderEdit);
 // Admin for Impuguke
 router.put(
   '/impuguke/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -347,6 +445,7 @@ router.get('/impuguke/edit/:id', adminFactory.renderEdit);
 // Admin for Impuguke
 router.put(
   '/impugukek/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -357,6 +456,7 @@ router.get('/impugukek/edit/:id', adminFactory.renderEdit);
 // Admin for Iyobokamana
 router.put(
   '/iyobokamana/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -367,6 +467,7 @@ router.get('/iyobokamana/edit/:id', adminFactory.renderEdit);
 // Admin for Transport
 router.put(
   '/amakamyo/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -374,18 +475,29 @@ router.delete('/amakamyo/:id', adminFactory.deleteData);
 router.get('/amakamyo/:slug', adminFactory.getOneData);
 router.get('/amakamyo/edit/:id', adminFactory.renderEdit);
 // Admin for Transport
-router.put('/bus/:id', adminFactory.updateData, saveDataAndRedirect('edit'));
+router.put(
+  '/bus/:id',
+  upload.array('image', 5),
+  adminFactory.updateData,
+  saveDataAndRedirect('edit')
+);
 router.delete('/bus/:id', adminFactory.deleteData);
 router.get('/bus/:slug', adminFactory.getOneData);
 router.get('/bus/edit/:id', adminFactory.renderEdit);
 // Admin for Transport
-router.put('/motot/:id', adminFactory.updateData, saveDataAndRedirect('edit'));
+router.put(
+  '/motot/:id',
+  upload.array('image', 5),
+  adminFactory.updateData,
+  saveDataAndRedirect('edit')
+);
 router.delete('/motot/:id', adminFactory.deleteData);
 router.get('/motot/:slug', adminFactory.getOneData);
 router.get('/motot/edit/:id', adminFactory.renderEdit);
 // Admin for Transport
 router.put(
   '/taxvoiture/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -393,13 +505,19 @@ router.delete('/taxvoiture/:id', adminFactory.deleteData);
 router.get('/taxvoiture/:slug', adminFactory.getOneData);
 router.get('/taxvoiture/edit/:id', adminFactory.renderEdit);
 // Admin for Transport
-router.put('/fuso/:id', adminFactory.updateData, saveDataAndRedirect('edit'));
+router.put(
+  '/fuso/:id',
+  upload.array('image', 5),
+  adminFactory.updateData,
+  saveDataAndRedirect('edit')
+);
 router.delete('/fuso/:id', adminFactory.deleteData);
 router.get('/fuso/:slug', adminFactory.getOneData);
 router.get('/fuso/edit/:id', adminFactory.renderEdit);
 // Admin for Transport
 router.put(
   '/daihatsu/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -408,13 +526,19 @@ router.get('/daihatsu/:slug', adminFactory.getOneData);
 router.get('/daihatsu/edit/:id', adminFactory.renderEdit);
 
 // Admin for Inkunga
-router.put('/ngo/:id', adminFactory.updateData, saveDataAndRedirect('edit'));
+router.put(
+  '/ngo/:id',
+  upload.array('image', 5),
+  adminFactory.updateData,
+  saveDataAndRedirect('edit')
+);
 router.delete('/ngo/:id', adminFactory.deleteData);
 router.get('/ngo/:slug', adminFactory.getOneData);
 router.get('/ngo/edit/:id', adminFactory.renderEdit);
 // Admin for Inkunga
 router.put(
   '/abikorera/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -424,6 +548,7 @@ router.get('/abikorera/edit/:id', adminFactory.renderEdit);
 // Admin for Inkunga
 router.put(
   '/ibigobyaleta/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -433,6 +558,7 @@ router.get('/ibigobyaleta/edit/:id', adminFactory.renderEdit);
 // Admin for Inkunga
 router.put(
   '/amabanki/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -443,6 +569,7 @@ router.get('/amabanki/edit/:id', adminFactory.renderEdit);
 // Admin for Isoko
 router.put(
   '/ubuconco/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -452,6 +579,7 @@ router.get('/ubuconco/edit/:id', adminFactory.renderEdit);
 // Admin for Isoko
 router.put(
   '/ibiribwa/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -461,6 +589,7 @@ router.get('/ibiribwa/edit/:id', adminFactory.renderEdit);
 // Admin for Isoko
 router.put(
   '/amatungo/:id',
+  upload.array('image', 5),
   adminFactory.updateData,
   saveDataAndRedirect('edit')
 );
@@ -470,7 +599,39 @@ router.get('/amatungo/edit/:id', adminFactory.renderEdit);
 
 function saveDataAndRedirect(path) {
   return catchAsync(async (req, res) => {
+    const uploaders = async (path) => await cloudinaries.uploads(path, 'Image');
+    const urls = [];
+    const ids = [];
+    let files = req.files;
     let data = req.data;
+    const realUrls = [];
+
+    for (const file of files) {
+      const { path } = file;
+      const newPath = await uploaders(path);
+      urls.push(newPath);
+      fs.unlinkSync(path);
+    }
+    for (let i = 0; i < urls.length; i++) {
+      ids.push(urls[i].id);
+    }
+    for (let i = 0; i < urls.length; i++) {
+      realUrls.push(urls[i].url);
+    }
+
+    if (req.file) {
+      try {
+        for (let i = 0; i < ids.length; i++) {
+          await cloudinary.v2.uploader.destroy(ids[i]);
+        }
+        files = await cloudinaries.v2.uploader.upload(req.file.path);
+        data.images = files.secure_url;
+        data.imageIds = files.public_id;
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
     data.name = req.body.name;
     data.summary = req.body.summary;
     data.description = req.body.description;
@@ -484,7 +645,8 @@ function saveDataAndRedirect(path) {
     data.owner = req.body.owner;
     data.akagari = req.body.akagari;
     data.videoLink = req.body.videoLink;
-    data.imageCover = req.body.imageCover;
+    data.image = realUrls;
+    data.imageIds = ids;
 
     try {
       data = await data.save();
@@ -495,5 +657,32 @@ function saveDataAndRedirect(path) {
     }
   });
 }
+// function saveDataAndRedirect(path) {
+//   return catchAsync(async (req, res) => {
+//     let data = req.data;
+//     data.name = req.body.name;
+//     data.summary = req.body.summary;
+//     data.description = req.body.description;
+//     data.cost = req.body.cost;
+//     data.size = req.body.size;
+//     data.nationality = req.body.nationality;
+//     data.intara = req.body.intara;
+//     data.identifier = req.body.identifier;
+//     data.akarere = req.body.akarere;
+//     data.umurenge = req.body.umurenge;
+//     data.owner = req.body.owner;
+//     data.akagari = req.body.akagari;
+//     data.videoLink = req.body.videoLink;
+//     data.imageCover = req.body.imageCover;
+
+//     try {
+//       data = await data.save();
+//       res.redirect(`/admin`);
+//     } catch (err) {
+//       console.log(err);
+//       res.render(`admin/${path}`, { data });
+//     }
+//   });
+// }
 
 module.exports = router;

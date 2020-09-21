@@ -21,13 +21,8 @@ const dataSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
-    imageCover: {
-      type: String,
-      required: [true, 'Inzu ikenera ifoto'],
-    },
-    imageOne: String,
-    imageTwo: String,
-    imageThree: String,
+    image: [String],
+    imageIds: [String],
     cost: {
       type: String,
       required: [true, 'Igiciro kirakenewe'],

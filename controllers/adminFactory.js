@@ -1,5 +1,9 @@
 /* eslint-disable */
+const fs = require('fs');
+const cloudinary = require('cloudinary');
 
+const upload = require('../utils/multer');
+const cloudinaries = require('../utils/cloudinary');
 const catchAsync = require('../utils/catchAsync');
 const AppError = require('../utils/appError');
 const APIFeatures = require('../utils/apiFeatures');
@@ -32,6 +36,21 @@ exports.getOneData = async (req, res) => {
 };
 
 exports.deleteData = async (req, res) => {
-  await Data.findByIdAndDelete(req.params.id);
-  res.redirect('/admin');
+  Data.findById(req.params.id, async function (err, data) {
+    if (err) {
+      console.log(err);
+      return res.redirect('/admin');
+    }
+    try {
+      let ids = data.imageIds;
+      for (let i = 0; i < ids.length; i++) {
+        await cloudinary.v2.uploader.destroy(ids[i]);
+      }
+      data.remove();
+      res.redirect('/admin');
+    } catch (err) {
+      console.log(err);
+      return res.redirect('/admin');
+    }
+  });
 };

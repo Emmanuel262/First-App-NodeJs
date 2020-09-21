@@ -13,14 +13,14 @@ html(lang="en")
                     | 
                     a.btn.btn-primary.d-inline(href="/admin") Admin
 
-            form(action=`/admin/amazu/${data.id}?_method=PUT` method="POST")
+            form(action=`/admin/amazu/${data.id}?_method=PUT` method="POST" enctype="multipart/form-data")
                 .form-row
                     .form-group.col-md-6
                         label(for="name") Name
                         input#name.form-control(required type="text" name="name" value=`${data.name}`)
                     .form-group.col-md-6
-                        label(for='imageCover') ImageCover
-                        input#imageCover.form-control(required type="text" name="imageCover" value=`${data.imageCover}`)
+                        label(for="image") Image
+                        input#image(type="file" name="image" accept="image/*" multiple value=`${data.image}`)
 
                 .form-row
                     .form-group.col-md-6

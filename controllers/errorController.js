@@ -70,7 +70,8 @@ const sendErrorProd = (err, req, res) => {
   if (err.isOperational) {
     return res.status(err.statusCode).render('error', {
       title: 'Something went wrong!',
-      msg: err.message,
+      msg: err,
+      // msg: err.message,
     });
   }
   //B. Programming or other unkonw error: don't leak error details

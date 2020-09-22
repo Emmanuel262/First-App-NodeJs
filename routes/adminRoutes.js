@@ -600,7 +600,7 @@ router.get('/amatungo/:slug', adminFactory.getOneData);
 router.get('/amatungo/edit/:id', adminFactory.renderEdit);
 
 function saveDataAndRedirect(path) {
-  return catchAsync(async (req, res) => {
+  return async (req, res) => {
     const uploaders = async (path) => await cloudinaries.uploads(path, 'Image');
     const urls = [];
     const ids = [];
@@ -630,6 +630,7 @@ function saveDataAndRedirect(path) {
         data.imageIds = files.public_id;
       } catch (err) {
         console.log(err);
+        res.render(`admin/${path}`, { data });
       }
     }
 
@@ -656,7 +657,7 @@ function saveDataAndRedirect(path) {
       console.log(err);
       res.render(`admin/${path}`, { data });
     }
-  });
+  };
 }
 
 // function saveDataAndRedirect(path) {

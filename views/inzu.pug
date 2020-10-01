@@ -24,15 +24,20 @@ block content
         .ikirango
           h1 Andi Mafoto Aranga
         .image-section
-            img(src=`/img/amazu/${inzu.imageCover}` alt=`${inzu.name}`)
-            img(src="https://turaheza562410419.files.wordpress.com/2018/11/img-20181123-wa03431.jpg" alt="")
-            img(src="https://turaheza562410419.files.wordpress.com/2018/11/img-20181109-wa0091.jpg" alt="")
-            img(src="https://turaheza562410419.files.wordpress.com/2019/06/img-20190615-wa0306.jpg" alt="")
-            img(src="https://turaheza562410419.files.wordpress.com/2018/08/img-20180810-wa0008.jpg" alt="")
-            img(src="https://turaheza562410419.files.wordpress.com/2018/11/img-20181123-wa03431.jpg" alt="")
-            img(src="https://turaheza562410419.files.wordpress.com/2018/11/img-20181109-wa0091.jpg" alt="")
-            img(src="https://turaheza562410419.files.wordpress.com/2019/06/img-20190615-wa0306.jpg" alt="")
-            img(src="https://turaheza562410419.files.wordpress.com/2018/08/img-20180810-wa0008.jpg" alt="")
+          - if (inzu.image[0] === undefined)
+              img(src=`/img/amazu/defaultHouse.png` alt=`${inzu.name}`)
+              img(src="https://turaheza562410419.files.wordpress.com/2018/11/img-20181123-wa03431.jpg" alt="")
+              img(src="https://turaheza562410419.files.wordpress.com/2018/11/img-20181109-wa0091.jpg" alt="")
+              img(src="https://turaheza562410419.files.wordpress.com/2019/06/img-20190615-wa0306.jpg" alt="")
+              img(src="https://turaheza562410419.files.wordpress.com/2018/08/img-20180810-wa0008.jpg" alt="")
+              img(src="https://turaheza562410419.files.wordpress.com/2018/11/img-20181123-wa03431.jpg" alt="")
+              img(src="https://turaheza562410419.files.wordpress.com/2018/11/img-20181109-wa0091.jpg" alt="")
+              img(src="https://turaheza562410419.files.wordpress.com/2019/06/img-20190615-wa0306.jpg" alt="")
+              img(src="https://turaheza562410419.files.wordpress.com/2018/08/img-20180810-wa0008.jpg" alt="")
+
+          - else
+            each img in inzu.image
+              img(src= `${img}`, alt=`${inzu.name}`)
 
         
         .video-information

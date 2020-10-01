@@ -10,14 +10,13 @@ html(lang="en")
             h1.mb-3.mt-3.text-center Add new Data
                 .back-button 
                     a.btn.btn-primary.d-inline(href="/") Ntumikira
-                    | 
-                    a.btn.btn-primary.d-inline(href="/admin") Admin
 
-            form(action=`/admin/amazu/${data.id}?_method=PUT` method="POST" enctype="multipart/form-data")
+
+            form(action="/admin/everyone" method="POST" enctype="multipart/form-data")
                 .form-row
                     .form-group.col-md-6
                         label(for="name") Name
-                        input#name.form-control(required type="text" name="name" value=`${data.name}`)
+                        input#name.form-control(required type="text" name="name" )
                     .form-group.col-md-6
                         label(for="image") Image
                         input#image(type="file" name="image" accept="image/*" multiple)
@@ -25,48 +24,44 @@ html(lang="en")
                 .form-row
                     .form-group.col-md-6
                         label(for="identifier") Identifier
-                        input#identifier.form-control(required="" type="text" name="identifier" value=`${data.identifier}`)
+                        input#identifier.form-control(required="" type="text" name="identifier" )
                     .form-group.col-md-6
                         label(for="videoLink") videoLink
-                        input#videoLink.form-control(required="" type="text" name="videoLink" value=`${data.videoLink}`)
+                        input#videoLink.form-control(required="" type="text" name="videoLink" )
                 .form-row
                     .form-group.col-md-6
                         label(for="summary") Summary
-                        textarea#summary.form-control(name="summary" )=`${data.summary}`
+                        textarea#summary.form-control(name="summary" )
                     .form-group.col-md-6
                         label(for="description") Description
-                        textarea#description.form-control(name="description")=`${data.description}`
+                        textarea#description.form-control(name="description" )
                 .form-row
                     .form-group.col-md-6
                         label(for="nationality") Nationality
-                        input#nationality.form-control(required="" type="text" name="nationality" value=`${data.nationality}`)
+                        input#nationality.form-control(required="" type="text" name="nationality")
                     .form-group.col-md-6
                         label(for="intara") Intara
-                        input#intara.form-control(required="" type="text" name="intara" value=`${data.intara}`)
+                        input#intara.form-control(required="" type="text" name="intara" )
                 .form-row
                     .form-group.col-md-6
                         label(for="akarere") Akarere
-                        input#akarere.form-control(required="" type="text" name="akarere" value=`${data.akarere}`)
+                        input#akarere.form-control(required="" type="text" name="akarere")
                     .form-group.col-md-6
                         label(for="umurenge") Umurenge
-                        input#umurenge.form-control(required="" type="text" name="umurenge" value=`${data.umurenge}`)
+                        input#umurenge.form-control(required="" type="text" name="umurenge" )
                 .form-row
                     .form-group.col-md-6
                         label(for="owner") Nyirubwite
-                        input#owner.form-control(required="" type="text" name="owner" value=`${data.owner}`)
+                        input#owner.form-control(required="" type="text" name="owner" )
                     .form-group.col-md-6
                         label(for="akagari") Akagari
-                        input#akagari.form-control(required="" type="text" name="akagari" value=`${data.akagari}`)
+                        input#akagari.form-control(required="" type="text" name="akagari")
                 .form-row
                     .form-group.col-md-6
                         label(for="cost") Cost
-                        input#cost.form-control(required="" type="number" name="cost" value=`${data.cost}`)
+                        input#cost.form-control(required="" type="number" name="cost" )
                     .form-group.col-md-6
                         label(for="size") Size
-                        input#size.form-control(required="" type="number" name="size" value=`${data.size}`)
-                .form-row
-                    .form-group.col-md-6
-                        label(for="visibility") ON/OFF
-                        input#visibility.form-control(type="text" name="visibility" value=`${data.visibility}`)
-                a.btn.btn-secondary.mr-3(href="/admin") Cancel
+                        input#size.form-control(required="" type="number" name="size" )
+                a.btn.btn-secondary.mr-3(href="/") Cancel
                 button.btn.btn-primary(type="submit") Save

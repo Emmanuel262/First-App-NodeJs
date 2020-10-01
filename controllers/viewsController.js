@@ -13,7 +13,18 @@ const Data = require('../models/dataModel');
 exports.getAllDataAvailable = catchAsync(async (req, res, next) => {
   if (req.query.search) {
     const regex = new RegExp(escapeRegex(req.query.search), 'gi');
-    const amazu = await Data.find({ name: regex }).sort({
+    const amazu = await Data.find({
+      visibility: true,
+      $or: [
+        { name: regex },
+        { akarere: regex },
+        { intara: regex },
+        { umurenge: regex },
+        { nationality: regex },
+        { identifier: regex },
+        { akagari: regex },
+      ],
+    }).sort({
       createdAt: 'desc',
     });
     res.status(200).render('amazu', {
@@ -26,9 +37,11 @@ exports.getAllDataAvailable = catchAsync(async (req, res, next) => {
 //  amazu data
 exports.getAmazuData = catchAsync(async (req, res, next) => {
   const identifier = 'amazu';
-  const amazu = await Data.find({ identifier: 'amazu' }).sort({
-    createdAt: 'desc',
-  });
+  const amazu = await Data.find({ identifier: 'amazu', visibility: true }).sort(
+    {
+      createdAt: 'desc',
+    }
+  );
   if (!amazu) {
     return next(new AppError('Nta mazu ahari.', 404));
   }
@@ -53,7 +66,10 @@ exports.getOneData = catchAsync(async (req, res, next) => {
 //  Ibibanza data
 exports.getIbibanzaData = catchAsync(async (req, res, next) => {
   const identifier = 'ibibanza';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -69,7 +85,10 @@ exports.getIbibanzaData = catchAsync(async (req, res, next) => {
 //  Imirima data
 exports.getImirimaData = catchAsync(async (req, res, next) => {
   const identifier = 'imirima';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -85,7 +104,10 @@ exports.getImirimaData = catchAsync(async (req, res, next) => {
 //  Inzuri data
 exports.getInzuriData = catchAsync(async (req, res, next) => {
   const identifier = 'inzuri';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -101,7 +123,10 @@ exports.getInzuriData = catchAsync(async (req, res, next) => {
 //  Amashyamba data
 exports.getAmashyambaData = catchAsync(async (req, res, next) => {
   const identifier = 'amashyamba';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -116,7 +141,10 @@ exports.getAmashyambaData = catchAsync(async (req, res, next) => {
 //  Imodoka data
 exports.getImodokaData = catchAsync(async (req, res, next) => {
   const identifier = 'imodoka';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -131,7 +159,10 @@ exports.getImodokaData = catchAsync(async (req, res, next) => {
 //  Moto data
 exports.getMotoData = catchAsync(async (req, res, next) => {
   const identifier = 'moto';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -146,7 +177,10 @@ exports.getMotoData = catchAsync(async (req, res, next) => {
 //  Ibindi bikoresho data
 exports.getIbikoreshoData = catchAsync(async (req, res, next) => {
   const identifier = 'ibikoresho';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -161,7 +195,10 @@ exports.getIbikoreshoData = catchAsync(async (req, res, next) => {
 //  Apartment  data
 exports.getApartmentData = catchAsync(async (req, res, next) => {
   const identifier = 'apartment';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -176,7 +213,10 @@ exports.getApartmentData = catchAsync(async (req, res, next) => {
 //  Rooms  data
 exports.getRoomsData = catchAsync(async (req, res, next) => {
   const identifier = 'rooms';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -191,7 +231,10 @@ exports.getRoomsData = catchAsync(async (req, res, next) => {
 //  Imirima  data
 exports.getImirimaGData = catchAsync(async (req, res, next) => {
   const identifier = 'imirimag';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -206,7 +249,10 @@ exports.getImirimaGData = catchAsync(async (req, res, next) => {
 //  Amashyamba  data
 exports.getAmashyambaGData = catchAsync(async (req, res, next) => {
   const identifier = 'amashyambag';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -221,7 +267,10 @@ exports.getAmashyambaGData = catchAsync(async (req, res, next) => {
 //  Imodoka  data
 exports.getImodokaGData = catchAsync(async (req, res, next) => {
   const identifier = 'imodokag';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -236,7 +285,10 @@ exports.getImodokaGData = catchAsync(async (req, res, next) => {
 //  Moto  data
 exports.getMotoGData = catchAsync(async (req, res, next) => {
   const identifier = 'motog';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -251,7 +303,10 @@ exports.getMotoGData = catchAsync(async (req, res, next) => {
 //  Inshuke data
 exports.getInshukeData = catchAsync(async (req, res, next) => {
   const identifier = 'inshuke';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -266,7 +321,10 @@ exports.getInshukeData = catchAsync(async (req, res, next) => {
 //  Abanza data
 exports.getAbanzaData = catchAsync(async (req, res, next) => {
   const identifier = 'abanza';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -281,7 +339,10 @@ exports.getAbanzaData = catchAsync(async (req, res, next) => {
 //  Ayisumbuye data
 exports.getAyisumbuyeData = catchAsync(async (req, res, next) => {
   const identifier = 'ayisumbuye';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -296,7 +357,10 @@ exports.getAyisumbuyeData = catchAsync(async (req, res, next) => {
 //  kaminuza data
 exports.getKaminuzaData = catchAsync(async (req, res, next) => {
   const identifier = 'kaminuza';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -311,7 +375,10 @@ exports.getKaminuzaData = catchAsync(async (req, res, next) => {
 //  ubumenyi ngiro data
 exports.getUbumenyiData = catchAsync(async (req, res, next) => {
   const identifier = 'ubumenyingiro';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -327,7 +394,10 @@ exports.getUbumenyiData = catchAsync(async (req, res, next) => {
 //  Amazu Kwigurishiriza data
 exports.getAmazuKData = catchAsync(async (req, res, next) => {
   const identifier = 'amazuk';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -343,7 +413,10 @@ exports.getAmazuKData = catchAsync(async (req, res, next) => {
 //  Ibibanza Kwigurishiriza data
 exports.getIbibanzaKData = catchAsync(async (req, res, next) => {
   const identifier = 'ibibanzak';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -358,7 +431,10 @@ exports.getIbibanzaKData = catchAsync(async (req, res, next) => {
 //  Imirima Kwigurishiriza data
 exports.getImirimaKData = catchAsync(async (req, res, next) => {
   const identifier = 'imirimak';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -373,7 +449,10 @@ exports.getImirimaKData = catchAsync(async (req, res, next) => {
 //  Inzuri Kwigurishiriza data
 exports.getInzuriKData = catchAsync(async (req, res, next) => {
   const identifier = 'inzurik';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -388,7 +467,10 @@ exports.getInzuriKData = catchAsync(async (req, res, next) => {
 //  Amashyamba Kwigurishiriza data
 exports.getAmashyambaKData = catchAsync(async (req, res, next) => {
   const identifier = 'amashyambak';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -403,7 +485,10 @@ exports.getAmashyambaKData = catchAsync(async (req, res, next) => {
 //  Imodoka Kwigurishiriza data
 exports.getImodokaKData = catchAsync(async (req, res, next) => {
   const identifier = 'imodokak';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -418,7 +503,10 @@ exports.getImodokaKData = catchAsync(async (req, res, next) => {
 //  Moto Kwigurishiriza data
 exports.getMotoKData = catchAsync(async (req, res, next) => {
   const identifier = 'motok';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -433,7 +521,10 @@ exports.getMotoKData = catchAsync(async (req, res, next) => {
 //  Ibindi Kwigurishiriza data
 exports.getIbindiKData = catchAsync(async (req, res, next) => {
   const identifier = 'ibindi kwigurishiriza';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -448,7 +539,10 @@ exports.getIbindiKData = catchAsync(async (req, res, next) => {
 //  Artists data
 exports.getArtistsData = catchAsync(async (req, res, next) => {
   const identifier = 'artists';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -463,7 +557,10 @@ exports.getArtistsData = catchAsync(async (req, res, next) => {
 //  Ubugeni data
 exports.getUbugeniData = catchAsync(async (req, res, next) => {
   const identifier = 'ubugeni';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -478,7 +575,10 @@ exports.getUbugeniData = catchAsync(async (req, res, next) => {
 //  Imikino data
 exports.getImikinoData = catchAsync(async (req, res, next) => {
   const identifier = 'imikino';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -493,7 +593,10 @@ exports.getImikinoData = catchAsync(async (req, res, next) => {
 //  Muzika data
 exports.getMuzikaData = catchAsync(async (req, res, next) => {
   const identifier = 'muzika';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -508,7 +611,10 @@ exports.getMuzikaData = catchAsync(async (req, res, next) => {
 //  Abana data
 exports.getAbanaData = catchAsync(async (req, res, next) => {
   const identifier = 'abana';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -523,7 +629,10 @@ exports.getAbanaData = catchAsync(async (req, res, next) => {
 //  Imyambaro data
 exports.getImyambaroData = catchAsync(async (req, res, next) => {
   const identifier = 'imyambaro';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -538,7 +647,10 @@ exports.getImyambaroData = catchAsync(async (req, res, next) => {
 //  IbikoreshoR data
 exports.getIbikoreshoRData = catchAsync(async (req, res, next) => {
   const identifier = 'ibikoreshor';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -554,7 +666,10 @@ exports.getIbikoreshoRData = catchAsync(async (req, res, next) => {
 //  Amatangazo Data
 exports.getArangishaData = catchAsync(async (req, res, next) => {
   const identifier = 'arangisha';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -570,7 +685,10 @@ exports.getArangishaData = catchAsync(async (req, res, next) => {
 //  Amatangazo Data
 exports.getAhinduraIzinaData = catchAsync(async (req, res, next) => {
   const identifier = 'ahindura';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -585,7 +703,10 @@ exports.getAhinduraIzinaData = catchAsync(async (req, res, next) => {
 //  Amatangazo Data
 exports.getAmenyeshaData = catchAsync(async (req, res, next) => {
   const identifier = 'amenyesha';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -600,7 +721,10 @@ exports.getAmenyeshaData = catchAsync(async (req, res, next) => {
 //  Akazi Data
 exports.getKurangaAkaziData = catchAsync(async (req, res, next) => {
   const identifier = 'kuranga';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -615,7 +739,10 @@ exports.getKurangaAkaziData = catchAsync(async (req, res, next) => {
 //  Gusaba Data
 exports.getGusabaAkaziData = catchAsync(async (req, res, next) => {
   const identifier = 'gusaba';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -630,7 +757,10 @@ exports.getGusabaAkaziData = catchAsync(async (req, res, next) => {
 //  Impuguke Data
 exports.getImpugukeData = catchAsync(async (req, res, next) => {
   const identifier = 'impuguke';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -645,7 +775,10 @@ exports.getImpugukeData = catchAsync(async (req, res, next) => {
 //  Impuguke Data
 exports.getImpugukeKumenyekanishaData = catchAsync(async (req, res, next) => {
   const identifier = 'impugukek';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -660,7 +793,10 @@ exports.getImpugukeKumenyekanishaData = catchAsync(async (req, res, next) => {
 //  Iyobokamana Data
 exports.getIyobokamanaData = catchAsync(async (req, res, next) => {
   const identifier = 'iyobokamana';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -675,7 +811,10 @@ exports.getIyobokamanaData = catchAsync(async (req, res, next) => {
 //  Transport Data
 exports.getAmakamyoTransportData = catchAsync(async (req, res, next) => {
   const identifier = 'amakamyo';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -690,7 +829,10 @@ exports.getAmakamyoTransportData = catchAsync(async (req, res, next) => {
 //  Transport Data
 exports.getBusTransportData = catchAsync(async (req, res, next) => {
   const identifier = 'bus';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -705,7 +847,10 @@ exports.getBusTransportData = catchAsync(async (req, res, next) => {
 //  Transport Data
 exports.getMotoTransportData = catchAsync(async (req, res, next) => {
   const identifier = 'motot';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -721,7 +866,10 @@ exports.getMotoTransportData = catchAsync(async (req, res, next) => {
 //  Transport Data
 exports.getTaxVoitureTransportData = catchAsync(async (req, res, next) => {
   const identifier = 'taxvoiture';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -736,7 +884,10 @@ exports.getTaxVoitureTransportData = catchAsync(async (req, res, next) => {
 //  Transport Data
 exports.getFusoTransportData = catchAsync(async (req, res, next) => {
   const identifier = 'fuso';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -751,7 +902,10 @@ exports.getFusoTransportData = catchAsync(async (req, res, next) => {
 //  Transport Data
 exports.getDaihatsuTransportData = catchAsync(async (req, res, next) => {
   const identifier = 'daihatsu';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -766,7 +920,10 @@ exports.getDaihatsuTransportData = catchAsync(async (req, res, next) => {
 //  Transport Data
 exports.getNgoData = catchAsync(async (req, res, next) => {
   const identifier = 'ngo';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -781,7 +938,10 @@ exports.getNgoData = catchAsync(async (req, res, next) => {
 //  Transport Data
 exports.getAbikoreraData = catchAsync(async (req, res, next) => {
   const identifier = 'abikorera';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -796,7 +956,10 @@ exports.getAbikoreraData = catchAsync(async (req, res, next) => {
 //  Transport Data
 exports.getIbigoData = catchAsync(async (req, res, next) => {
   const identifier = 'ibigobyaleta';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -811,7 +974,10 @@ exports.getIbigoData = catchAsync(async (req, res, next) => {
 //  Transport Data
 exports.getAmabankiData = catchAsync(async (req, res, next) => {
   const identifier = 'amabanki';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -826,7 +992,10 @@ exports.getAmabankiData = catchAsync(async (req, res, next) => {
 //  Transport Data
 exports.getUbuconcoData = catchAsync(async (req, res, next) => {
   const identifier = 'ubuconco';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -841,7 +1010,10 @@ exports.getUbuconcoData = catchAsync(async (req, res, next) => {
 //  Transport Data
 exports.getIbiribwaData = catchAsync(async (req, res, next) => {
   const identifier = 'ibiribwa';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {
@@ -856,7 +1028,10 @@ exports.getIbiribwaData = catchAsync(async (req, res, next) => {
 //  Transport Data
 exports.getAmatungoData = catchAsync(async (req, res, next) => {
   const identifier = 'amatungo';
-  const amazu = await Data.find({ identifier: identifier }).sort({
+  const amazu = await Data.find({
+    identifier: identifier,
+    visibility: true,
+  }).sort({
     createdAt: 'desc',
   });
   if (!amazu) {

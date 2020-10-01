@@ -44,6 +44,10 @@ const dataSchema = new mongoose.Schema(
       type: Date,
       default: new Date(),
     },
+    visibility: {
+      type: Boolean,
+      default: false,
+    },
   },
   {
     toJSON: { virtuals: true },
